@@ -1,24 +1,23 @@
-# README
+# Tony-Rails-Portfolio
+Fill in here...
+The ruby on rails source code for my portfolio.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Software
+* Ruby 3.2.0
+* Bootstrap 5.3.0
 
-Things you may want to cover:
+# Installation
+```sh
+bundle install
+rails db:migrate RAILS_ENV=development
+```
 
-* Ruby version
+# Run developement Server
+```sh
+rails server
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Deployement
+```sh
+# unsure of how to do this yet...
+```
