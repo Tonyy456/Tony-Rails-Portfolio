@@ -1,0 +1,39 @@
+Started GET "/" for 127.0.0.1 at 2023-06-28 13:51:29 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/tdalesandro/.rbenv/versions/3.2.0/lib/ruby/gems/3.2.0/gems/railties-7.0.5.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/tdalesandro/.rbenv/versions/3.2.0/lib/ruby/gems/3.2.0/gems/railties-7.0.5.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.4ms | Allocations: 633)
+Completed 200 OK in 31ms (Views: 8.7ms | ActiveRecord: 0.0ms | Allocations: 7362)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-28 13:58:00 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/tdalesandro/.rbenv/versions/3.2.0/lib/ruby/gems/3.2.0/gems/railties-7.0.5.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/tdalesandro/.rbenv/versions/3.2.0/lib/ruby/gems/3.2.0/gems/railties-7.0.5.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.5ms | Allocations: 272)
+Completed 200 OK in 2ms (Views: 1.2ms | Allocations: 903)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-28 13:59:13 -0400
+  
+SyntaxError (/home/tdalesandro/cwd/Tony-Rails-Portfolio/portfolio/config/routes.rb:2: syntax error, unexpected local variable or method, expecting `end' or dummy end
+  get 'home' to: 'home#index'
+             ^~
+):
+  
+config/routes.rb:2: syntax error, unexpected local variable or method, expecting `end' or dummy end
+config/routes.rb:2: syntax error, unexpected local variable or method, expecting `end' or dummy end
+config/routes.rb:2: syntax error, unexpected local variable or method, expecting `end' or dummy end
+Started GET "/" for 127.0.0.1 at 2023-06-28 14:03:29 -0400
+  
+ArgumentError (Missing :controller key on routes definition, please check your routes.):
+  
+config/routes.rb:3:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started GET "/" for 127.0.0.1 at 2023-06-28 14:03:42 -0400
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 106)
+  Rendered layout layouts/application.html.erb (Duration: 155.4ms | Allocations: 91948)
+Completed 200 OK in 157ms (Views: 156.2ms | Allocations: 92833)
+
+
