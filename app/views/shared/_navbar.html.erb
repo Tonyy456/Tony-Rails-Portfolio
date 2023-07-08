@@ -1,38 +1,39 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="border: 2px solid lightgray; margin-bottom: 20px;">
   <div class="container-fluid">
-
-    <!-- LOGO/TITLE -->
     <%= link_to(root_path, class: 'navbar-brand') do %>
         <div>
           <%= render partial:'svgs/logo' %>
-          <!--
-            <svg height="40" width="40" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="47" stroke="black" stroke-width="3" fill="red" />
-                Sorry, your browser does not support inline SVG.  
-            </svg> 
-          -->
         </div>
     <% end %>
-
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Left aligned-->
       <ul class="navbar-nav">
-
-        <!-- HOME LINK -->
-        <li class="nav-item">
-          
+        <li class="nav-item">      
           <%= link_to "Home", root_path, class: "nav-link active"  %>
         </li>
-
-        <!-- PORTFOLIO LINK -->
         <li class="nav-item">
           <%= link_to "Portfolio", portfolio_path, class: "nav-link"  %>
         </li>
-
       </ul>
+      <!-- Right aligned -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <% if user_signed_in? %>
+        <li class="nav-item" style="margin-right: 10px">
+          <%= button_to "Logout", destroy_user_session_path, class: "btn btn-outline-secondary", method: :delete  %>
+        </li>
+        <li class="nav-item" style="margin-right: 10px">
+          <%= button_to "CreateProjectPage", destroy_user_session_path, class: "btn btn-outline-secondary", method: :delete  %>
+        </li>
+        <% else %>
+        <li class="nav-item" style="margin-right: 10px">
+          <%= link_to "Admin Login",  new_user_session_path, class: "btn btn-outline-secondary"  %>
+        </li>
+        <% end %>
+      </ul> 
+      
     </div>
   </div>
 </nav>
