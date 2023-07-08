@@ -3,8 +3,9 @@ Fill in here...
 The ruby on rails source code for my portfolio.
 
 # References
-* [image upload](https://www.youtube.com/watch?v=1cw6qO1EYGw)  
-* [sub rail program pages](https://stackoverflow.com/questions/39006919/adding-a-rails-herokuapp-to-a-subpage-of-an-existing-page-domain)
+* [Image Upload](https://www.youtube.com/watch?v=1cw6qO1EYGw)  
+* [Make rails program a sub page](https://stackoverflow.com/questions/39006919/adding-a-rails-herokuapp-to-a-subpage-of-an-existing-page-domain)
+* [Devise README](https://github.com/heartcombo/devise)
 
 # Software
 * Ruby 3.2.0
