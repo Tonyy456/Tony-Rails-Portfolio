@@ -12,6 +12,9 @@ class PinsController < ApplicationController
 
   # GET /pins/new
   def new
+    if !user_signed_in?
+      redirect_to root_path, alert: "Must be admin to create new project"
+    end
     @pin = Pin.new
   end
 
@@ -23,15 +26,17 @@ class PinsController < ApplicationController
   def create
     @pin = Pin.new(pin_params)
 
-    respond_to do |format|
-      if @pin.save
-        format.html { redirect_to pin_url(@pin), notice: "Pin was successfully created." }
-        format.json { render :show, status: :created, location: @pin }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @pin.errors, status: :unprocessable_entity }
+    ActiveRecord::Base.connection_pool.with_connection do
+      respond_to do |format|
+        if @pin.save
+          format.html { redirect_to pin_url(@pin), notice: "Pin was successfully created." }
+          format.json { render :show, status: :created, location: @pin }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @pin.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    end 
   end
 
   # PATCH/PUT /pins/1 or /pins/1.json
@@ -65,6 +70,6 @@ class PinsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pin_params
-      params.require(:pin).permit(:title, :image, pictures: [])
+      params.require(:pin).permit(:title, :image, :body) #pictures: [])
     end
 end
