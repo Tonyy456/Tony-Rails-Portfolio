@@ -25,26 +25,18 @@
 
   <div>
     <%= form.label :use_link, style: "display: block; font-size: 1.5em;" %>
-    <%= form.check_box :use_link %>
+    <%= form.check_box :use_link, id: "use_link_checkbox" %>
     <%= form.text_field :page %>
-
   </div>
 
   <br/>
 
-  <div>
-    <%= form.label :body, style: "display: block; font-size: 1.5em;" %>
-    <%= form.rich_text_area :body %>
+  <div id="turn_off_form_checkbox">
+    <div>
+      <%= form.label :body, style: "display: block; font-size: 1.5em;" %>
+      <%= form.rich_text_area :body %>
+    </div>
   </div>
-
-  <%
-=begin%>
- <div>
-    <%= form.label :pictures %>
-    <%= form.file_field :pictures, multiple: true %>
-  </div> 
-<%
-=end%>
 
   <br/>
   <br/>
