@@ -1,4 +1,4 @@
-<%= form_with(model: pin) do |form| %>
+<%= form_with(model: pin, id: "rsvp") do |form| %>
   <% if pin.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(pin.errors.count, "error") %> prohibited this pin from being saved:</h2>
@@ -12,18 +12,28 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
+    <%= form.label "Project Title", style: "display: block; font-size: 1.5em;" %>
     <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image %>
   </div>
 
   <br/>
 
   <div>
+    <%= form.label "Cover Image", style: "display: block; font-size: 1.5em;" %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <%= form.label :use_link, style: "display: block; font-size: 1.5em;" %>
+    <%= form.check_box :use_link %>
+    <%= form.text_field :page %>
+
+  </div>
+
+  <br/>
+
+  <div>
+    <%= form.label :body, style: "display: block; font-size: 1.5em;" %>
     <%= form.rich_text_area :body %>
   </div>
 
@@ -36,7 +46,10 @@
 <%
 =end%>
 
+  <br/>
+  <br/>
+
   <div>
-    <%= form.submit %>
+    <%= form.submit "Create Project", style: "form-control" %>
   </div>
 <% end %>
