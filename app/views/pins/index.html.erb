@@ -1,14 +1,30 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Pins</h1>
-
-<div id="pins">
-  <% @pins.each do |pin| %>
-    <%= render pin %>
-    <p>
-      <%= link_to "Show this pin", pin %>
-    </p>
-  <% end %>
-</div>
+<h1>Project Manager</h1>
+<table class="table table-bordered table-stripped table-dark border-secondary table-sm" style="border: 10px solid gray; text-align: center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <% @pins.each_with_index do |pin, index| %>
+    <tr>
+      <th scope="row"> <%= index %> </th>
+      <td> <%= pin.title %> </td>
+      <td> <%= link_to "View", pin, class: "col" %> </td>      
+      <td> <%= link_to "Edit", edit_pin_path(pin), class: "col" %> </td>    
+      <td> <%= button_to "Destroy", pin, class: "col", method: :delete %> </td>    
+    </tr>
+    <% end %>
+    <tr>
+      <th scope="row"> </th>
+      <td> Create </td>
+      <td> <%= link_to "New pin", new_pin_path %> </td>      
+      <td>  </td>    
+      <td>  </td>    
+    </tr>
+  </tbody>
+</table>
 
 <%= link_to "New pin", new_pin_path %>

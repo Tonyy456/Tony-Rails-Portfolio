@@ -54,6 +54,10 @@ class PinsController < ApplicationController
 
   # DELETE /pins/1 or /pins/1.json
   def destroy
+    if !user_signed_in?
+      redirect_to root_path, alert: "Only admins can delete a project!"
+      return
+    end
     @pin.destroy
 
     respond_to do |format|
