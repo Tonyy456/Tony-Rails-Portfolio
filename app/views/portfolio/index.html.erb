@@ -1,2 +1,31 @@
-<h1>Portfolio#index</h1>
-<p>Find me in app/views/portfolio/index.html.erb</p>
+<h1>Tony's Project Portfolio!</h1>
+
+<% if user_signed_in? %>
+  <%= link_to pins_path do %>
+    <%= button_tag "Manager", class: "btn btn-primary" , style: "margin-right: 1em;"%>
+  <% end %>
+<% end %>
+
+<%# Flex Container. Children have class 'p-2' %>
+<div class="d-flex flex-row mb-3">
+  <% @pins.each do |pin| %>
+    <div class="p-2">
+      <div class="card" style="width: 18rem; border: 2px solid gray;">
+        <% if pin.image.content_type.in?(%w[image/jpeg image/png])%>
+          <%= link_to image_tag(pin.image, class: "card-img-top", style: "width: 100%; height: ;"), pin.image if pin.image.attached? %>
+          <hr />
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"> <%= pin.title %> </h5>
+          <p class="card-text"> project description. </p>
+          <% if pin[:use_link] %>
+            <%= link_to "View Project", pin.page, class: "btn btn-primary" %>
+          <% else %>
+            <%= link_to "View Project", pin, class: "btn btn-primary" %>        
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>
