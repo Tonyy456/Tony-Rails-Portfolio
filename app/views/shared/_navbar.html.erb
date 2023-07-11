@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" style="border: 2px solid lightgray; margin-bottom: 20px;">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="margin-bottom: 20px;">
   <div class="container-fluid">
     <%= link_to(root_path, class: 'navbar-brand') do %>
         <div>
@@ -17,20 +17,21 @@
         <li class="nav-item">
           <%= link_to "Portfolio", portfolio_path, class: "nav-link"  %>
         </li>
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "New Project", new_pin_path, class: "nav-link"  %>
-          </li>
-        <% end %>
       </ul>
       <!-- Right aligned -->
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Admin
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "New Project", new_pin_path, class: "dropdown-item"%></li>
+              <li><%= link_to "Project Manager", pins_path, class: "dropdown-item"%></li>
+            </ul>
+          </li>
         <li class="nav-item" style="margin-right: 10px">
           <%= button_to "Logout", destroy_user_session_path, class: "btn btn-outline-secondary", method: :delete  %>
-        </li>
-        <li class="nav-item" style="margin-right: 10px">
-          <%= button_to "CreateProjectPage", destroy_user_session_path, class: "btn btn-outline-secondary", method: :delete  %>
         </li>
         <% else %>
         <li class="nav-item" style="margin-right: 10px">

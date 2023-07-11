@@ -1,8 +1,13 @@
 <h1>Tony's Project Portfolio!</h1>
 
+<% if user_signed_in? %>
+  <%= link_to pins_path do %>
+    <%= button_tag "Manager", class: "btn btn-primary" , style: "margin-right: 1em;"%>
+  <% end %>
+<% end %>
+
 <%# Flex Container. Children have class 'p-2' %>
 <div class="d-flex flex-row mb-3">
-
   <% @pins.each do |pin| %>
     <div class="p-2">
       <div class="card" style="width: 18rem; border: 2px solid gray;">

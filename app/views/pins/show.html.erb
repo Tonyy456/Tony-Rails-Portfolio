@@ -1,10 +1,24 @@
 <p style="color: green"><%= notice %></p>
-
-<%= render @pin %>
-
-<div>
-  <%= link_to "Edit this pin", edit_pin_path(@pin) %> |
-  <%= link_to "Back to pins", pins_path %>
-
-  <%= button_to "Destroy this pin", @pin, method: :delete %>
+<% if user_signed_in? %>
+  <div class="d-flex">
+    <%= render partial: "buttonget", locals: { text: "Manager", link: pins_path } %> 
+    <%= render partial: "buttonget", locals: { text: "Edit Project", link: edit_pin_path(@pin) } %> 
+    <%= button_to "Destroy this project", @pin, class: "col btn btn-primary", method: :delete, style:"margin-right: 1em;", :onclick => "return confirm('Are you sure?')" %>
+  </div>
+  <br/>
+<% end %>
+<div class="p-5 mb-4 bg-body-tertiary rounded-3">
+  <div id="<%= dom_id @pin %>">
+  <p class="display-6 fw-bold">
+    <%= @pin.title %>
+  </p>
+  <br/>
+  <% if @pin.image.content_type.in?(%w[image/jpeg image/png])%>
+    <%= link_to image_tag(@pin.image_as_thumbnail), @pin.image if @pin.image.attached? %>
+    <hr />
+  <% end %>
+  <%= @pin.body %>
+  </div>
 </div>
+
+

@@ -10,29 +10,22 @@
       </ul>
     </div>
   <% end %>
-
   <div>
     <%= form.label "Project Title", style: "display: block; font-size: 1.5em;" %>
     <%= form.text_field :title %>
   </div>
-
   <br/>
-
   <div>
     <%= form.label "Cover Image", style: "display: block; font-size: 1.5em;" %>
     <%= form.file_field :image %>
   </div>
-
   <br/>
-
   <div>
     <%= form.label :use_link, style: "display: block; font-size: 1.5em;" %>
     <%= form.check_box :use_link, id: "use_link_checkbox" %>
     <%= form.text_field :page %>
   </div>
-
   <br/>
-
   <div id="turn_off_form_checkbox">
     <div>
       <%= form.label :body, style: "display: block; font-size: 1.5em;" %>

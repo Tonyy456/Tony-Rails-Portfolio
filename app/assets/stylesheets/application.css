@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+.trix-button-row {
+    .trix-button-group {
+        border-color: #0f172a;
+
+        .trix-button {
+            background-color: white;
+            border-color: #0f172a;
+
+            &.trix-active {
+                background-color: white;
+            }
+        }
+    }
+}
+
+

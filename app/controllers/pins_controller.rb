@@ -1,5 +1,6 @@
 class PinsController < ApplicationController
   before_action :set_pin, only: %i[ show edit update destroy ]
+  before_action :admin_only, except: %i[show]
 
   # GET /pins or /pins.json
   def index
@@ -12,9 +13,6 @@ class PinsController < ApplicationController
 
   # GET /pins/new
   def new
-    if !user_signed_in?
-      redirect_to root_path, alert: "Must be admin to create new project"
-    end
     @pin = Pin.new
   end
 
@@ -54,12 +52,7 @@ class PinsController < ApplicationController
 
   # DELETE /pins/1 or /pins/1.json
   def destroy
-    if !user_signed_in?
-      redirect_to root_path, alert: "Only admins can delete a project!"
-      return
-    end
     @pin.destroy
-
     respond_to do |format|
       format.html { redirect_to pins_url, notice: "Pin was successfully destroyed." }
       format.json { head :no_content }

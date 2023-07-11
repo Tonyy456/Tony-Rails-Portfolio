@@ -7,17 +7,19 @@ application.debug = false
 window.Stimulus   = application
 
 document.addEventListener('DOMContentLoaded', function() {
-    var useLinkCheckbox = document.getElementById('use_link_checkbox');
-    if(useLinkCheckbox == null) return;
-    var form = document.getElementById('rsvp'); // Replace 'your_form_id' with the actual form ID
-    var turnoff = document.getElementById('turn_off_form_checkbox'); // Replace 'your_form_id' with the actual form ID
+  var useLinkCheckbox = document.getElementById('use_link_checkbox');
+  var turnoff = document.getElementById('turn_off_form_checkbox'); 
+  var turnon = document.getElementById('turn_on_form_link_box');
+  if(useLinkCheckbox == null || turnoff == null || turnon == null) return;
   
     function toggleFormFields() {
       if(turnoff == null) return;  
       if (useLinkCheckbox.checked) {
         turnoff.style.display='none'
+        turnon.style.display='block'
       } else {
         turnoff.style.display='block'
+        turnon.style.display='none'
       }
     }
   
