@@ -86,6 +86,3 @@ production:
   database: Tony_Rails_Portfolio_production
   username: Tony_Rails_Portfolio
   password: <%= ENV["TONY_RAILS_PORTFOLIO_DATABASE_PASSWORD"] %>
-  # database: <%= Rails.application.credentials.DB_NAME.prod_db %>
-  # username: <%= Rails.application.credentials.DB_USERNAME.prod_db %>
-  # password: <%= Rails.application.credentials.DB_PASSWORD.prod_db %>
