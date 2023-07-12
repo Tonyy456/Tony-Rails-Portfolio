@@ -1,5 +1,4 @@
 import { Application } from "@hotwired/stimulus"
-import "../trix-editor-overrides"
 console.log("doing thing")
 
 const application = Application.start()
