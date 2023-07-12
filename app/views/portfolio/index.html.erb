@@ -12,7 +12,7 @@
     <div class="p-2">
       <div class="card" style="width: 18rem; border: 2px solid gray;">
         <% if pin.image.content_type.in?(%w[image/jpeg image/png])%>
-          <%= link_to image_tag(pin.image, class: "card-img-top", style: "width: 100%; height: ;"), pin.image if pin.image.attached? %>
+          <%= link_to image_tag(pin.image, class: "card-img-top", style: "width: 100%; height: ;"), url_for(pin.image) if pin.image.attached? %>
           <hr />
         <% end %>
         <div class="card-body">
