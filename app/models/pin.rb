@@ -17,5 +17,5 @@ class Pin < ApplicationRecord
     def image_as_limit(limx, limy)
         return unless image.content_type.in?(%w[image/jpeg image/png])
         image.variant(resize_to_limit: [limx,limy]).processed
-    end
+    end 
 end

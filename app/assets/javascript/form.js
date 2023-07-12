@@ -19,4 +19,4 @@ document.addEventListener('DOMContentLoaded', function() {
     useLinkCheckbox.addEventListener('change', toggleFormFields);
     toggleFormFields(); // Call the function initially to set the initial state of the form fields
   });
-  
+  console.log("something happened")

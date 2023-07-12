@@ -1,4 +1,6 @@
 import { Application } from "@hotwired/stimulus"
+import "../trix-editor-overrides"
+console.log("doing thing")
 
 const application = Application.start()
 
@@ -27,4 +29,18 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleFormFields(); // Call the function initially to set the initial state of the form fields
 });
 
+window.addEventListener('trix-attachment-remove', function(e) {
+  console.log(e)
+  console.log("Hello world 1")
+});
+
+window.addEventListener('trix-file-accept', function(e) {
+  console.log(e)
+  console.log("Hello world 2")
+});
+
+window.addEventListener('trix-attachment-add', function(e) {
+  console.log(e)
+  console.log("Hello world 3")
+});
 export { application }
