@@ -4,8 +4,6 @@ class PinsController < ApplicationController
 
   # GET /pins or /pins.json
   def index
-    puts "MOM GET THE CAMREA"
-    AWS::S3::S3Object.delete('36emf26dfibcfk6agomf5pbb895w', 'antdev-bucket')
     @pins = Pin.all
   end
 
