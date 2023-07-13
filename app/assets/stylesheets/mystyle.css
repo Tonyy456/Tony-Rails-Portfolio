@@ -1,21 +1,8 @@
-html.dark {
-    .trix-button-row {
-        .trix-button-group {
-            border-color: #0f172a;
-
-            .trix-button {
-                background-color: #94a3b8;
-                border-color: #0f172a;
-
-                &.trix-active {
-                    background-color: lighten(#94a3b8, 10%);
-                }
-            }
-        }
-    }
-
-    .trix-content {
-        background-color: #0f172a;
-        border-color: #344155;
-    }
+.my-button-wrapper {
+    display: table;
+    vertical-align: middle;
+}
+.my-button-wrapper form {
+    display: table-cell;
+    vertical-align: middle;
 }

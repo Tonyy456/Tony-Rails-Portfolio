@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'portfolio', to: 'portfolio#index'
   get 'home', to: 'home#index'
   get 'pin_test', to: 'pins#index'
+  get 'ad', to: redirect('/users/sign_in')
+
   root to: 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
