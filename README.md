@@ -6,6 +6,7 @@ Deployed at: www.antdev.cc
 * [Make rails program a sub page](https://stackoverflow.com/questions/39006919/adding-a-rails-herokuapp-to-a-subpage-of-an-existing-page-domain)
 * [Devise README](https://github.com/heartcombo/devise)
 * [Admin Only Features](https://www.youtube.com/watch?v=H8ZfAxfE3yI)
+* [Using Strava's API](https://developers.strava.com/docs/getting-started/)
 
 # Services Used
 * Amazon S3 Bucket
