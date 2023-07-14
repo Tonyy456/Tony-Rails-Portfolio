@@ -28,18 +28,31 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleFormFields(); // Call the function initially to set the initial state of the form fields
 });
 
-window.addEventListener('trix-attachment-remove', function(e) {
-  console.log(e)
-  console.log("Hello world 1")
-});
+var videos = null;
+document.addEventListener('turbo:load', function() {
+  videos = Array.from(document.querySelectorAll('[id^=banner-video-]'));
 
-window.addEventListener('trix-file-accept', function(e) {
-  console.log(e)
-  console.log("Hello world 2")
-});
+  videos.forEach(function (e, i) {
+    e.preload = 'auto';
+    e.style.display = 'none' //double check ;)
+    
+    //wire up onended
+    const next = (++i) % videos.length;
+    const n_vid = videos[next];
+    e.onended = function()
+    {
+      e.style.display = 'none'
+      e.pause()
 
-window.addEventListener('trix-attachment-add', function(e) {
-  console.log(e)
-  console.log("Hello world 3")
-});
+      //display next video and play it
+      n_vid.style.display='block'
+      n_vid.play();
+    }
+  })
+  if(videos.length == 0) return;
+  const first = videos[0];
+  first.style.display = 'block'
+  first.play();
+})
+
 export { application }

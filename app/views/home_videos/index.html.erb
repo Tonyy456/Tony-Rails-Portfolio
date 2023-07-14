@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Home videos</h1>
+
+<div class="d-flex flex-row mb-3">
+  <% @home_videos.each do |home_video| %>
+    <div class="p-2">
+      <%# image_tag @home_video.video.preview(resize_to_limit: [100, 100]) %>
+      <%# video_tag @home_video.video.service_url, size: "150x120", controls: true %>
+      <%# video_tag url_for(@home_video.video), size: "150x120", controls: true, autoplay: true, style: "width: auto; height: 30vh; outline: none;" %>
+      <div class="card" style="width: 18rem; border: 2px solid gray;">
+          <%= link_to video_tag(url_for(home_video.video), class: "card-img-top", style: "width: 100%;", controls: true), url_for(home_video.video) if home_video.video.attached? %>
+          <hr />
+          <div class="card-body">
+            <h5 class="card-title"> Banner Video </h5>
+            <p class="card-text"> <%= home_video.created_at %> </p>
+            <%= button_to "Destroy", home_video, class: "btn btn-primary", method: :delete, :onclick => "return confirm('Are you sure?')" %>
+          </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= link_to "New home video", new_home_video_path %>

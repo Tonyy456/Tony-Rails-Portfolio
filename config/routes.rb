@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :home_videos, :except => [:edit, :show, :update]
   resources :pins
   devise_for :users, :skip => [:registrations], controllers: {
     sessions: 'users/sessions',
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
     put 'users' => 'devise/registrations#update', :as => 'user_registration'
   end
   
+  get 'admin', to: 'home#admin'
   get 'portfolio', to: 'portfolio#index'
   get 'home', to: 'home#index'
   get 'pin_test', to: 'pins#index'
