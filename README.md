@@ -7,6 +7,7 @@ Deployed at: www.antdev.cc
 * [Devise README](https://github.com/heartcombo/devise)
 * [Admin Only Features](https://www.youtube.com/watch?v=H8ZfAxfE3yI)
 * [Using Strava's API](https://developers.strava.com/docs/getting-started/)
+* [Strava Documentation](https://developers.strava.com/docs/reference/)
 
 # Services Used
 * Amazon S3 Bucket
