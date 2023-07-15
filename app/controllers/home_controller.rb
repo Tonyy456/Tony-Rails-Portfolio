@@ -24,7 +24,8 @@ class HomeController < ApplicationController
       Zip::File.open(params[:folder_upload].path) do |zip_file|
         zip_file.each do |f|
           if image_file?(f)
-            @uploaded_images << f.name # Add the extracted image path to the list
+            @uploaded_images << f.name 
+            # https://stackoverflow.com/questions/19754883/how-to-unzip-a-zip-file-containing-folders-and-files-in-rails-while-keeping-the
           end
         end
       end
@@ -39,5 +40,4 @@ class HomeController < ApplicationController
   end
 end
 
-# FileUtils.mkdir_p(File.dirname(f_path))
-# zip_file.extract(f, f_path) unless File.exist?(f_path)
+
