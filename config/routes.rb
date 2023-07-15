@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     put 'users' => 'devise/registrations#update', :as => 'user_registration'
   end
   
+  get 'fileupload', to: 'home#fileupload'
+  post 'upload', to: 'home#upload'
+
   get 'admin', to: 'home#admin'
   get 'portfolio', to: 'portfolio#index'
   get 'home', to: 'home#index'
