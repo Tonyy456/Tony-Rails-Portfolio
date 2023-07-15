@@ -1,0 +1,15 @@
+<h1> file upload form: </h1>
+
+<%= form_tag({ action: :upload }, multipart: true) do %>
+  <%= file_field_tag :folder_upload %>
+  <%= submit_tag 'Upload' %>
+<% end %>
+<br/>
+<% if @uploaded_images.present? %>
+  <h2>Uploaded Images:</h2>
+  <% @uploaded_images.each do |image_path| %>
+    <p>
+        <%= image_path %>
+    </p>
+  <% end %>
+<% end %>
