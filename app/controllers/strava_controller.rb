@@ -3,10 +3,10 @@ class StravaController < ApplicationController
 
     # GET RUN LOG
     def index
-
+        @runs = Run.all
     end
 
-    # Make request for last 100 runs
+    # GET Make request for last 100 runs
     def recent
         strava_client = get_strava_client
         if(strava_client)
@@ -14,7 +14,7 @@ class StravaController < ApplicationController
         end
     end
 
-    # Authenticate. Admin only
+    # GET Authenticate. Admin only
     def oauth
         admin_only
         client = get_client
@@ -28,6 +28,7 @@ class StravaController < ApplicationController
         redirect_to redirect_url, allow_other_host: true
     end
 
+    # GET callback after oauth
     def callback
         admin_only
         client = get_client

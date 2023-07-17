@@ -16,3 +16,58 @@
     height: 100%; 
     object-fit: cover;
 }
+
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+td {
+    display: table-cell;
+    vertical-align: inherit;
+}
+td, th {
+    padding: 0;
+}
+
+.ContributionCalendar-grid {
+    width: max-content;
+    border-collapse: separate;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    word-wrap: normal;
+    border: 0;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.ContributionCalendar-label {
+    padding: .125em .5em .125em 0;
+    font-size: 12px;
+    font-weight: var(--base-text-weight-normal, 400);
+    color: var(--color-fg-default);
+    text-align: left;
+    fill: var(--color-fg-default);
+}
+
+.ContributionCalendar-day, .ContributionCalendar-day {
+    fill: rgb(33, 184, 20);
+    shape-rendering: geometricPrecision;
+    background-color: rgb(33, 184, 20);
+    border-radius: 2px;
+    outline: 1px solid rgb(40, 44, 40);
+    outline-offset: -1px;
+}
+
