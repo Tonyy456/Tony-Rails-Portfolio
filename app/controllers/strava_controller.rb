@@ -1,9 +1,6 @@
 class StravaController < ApplicationController
     # before_action :admin_only, except: %i[index]
 
-    # def create_run
-    # end
-
     # GET RUN LOG
     def index
     end
