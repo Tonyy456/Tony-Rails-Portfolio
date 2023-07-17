@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   get 'ad', to: redirect('/users/sign_in')
 
   get 'runlog', to: 'strava#index'
+  get 'runlog/strava/recent', to: 'strava#recent'
+  get 'runlog/oauth', to: 'strava#oauth'
+  get 'runlog/callback', to: 'strava#callback'
 
   root to: 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

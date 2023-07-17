@@ -1,1 +1,4 @@
-<h1> Run log </h1>
+<h1> Run Log </h1>
+<% if user_signed_in? %>
+    <%= link_to "See last 100 runs", runlog_oauth_path, class: 'btn btn-primary' %>
+<% end %>
