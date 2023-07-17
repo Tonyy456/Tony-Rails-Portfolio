@@ -68,7 +68,7 @@ class StravaController < ApplicationController
     end
 
     def get_client
-        Strava::OAuth::Client.new( client_id: "110569", client_secret: ENV['STRAVA_CLIENT_SECRET'])
+        Strava::OAuth::Client.new( client_id: ENV['STRAVA_ID'], client_secret: ENV['STRAVA_CLIENT_SECRET'])
     end
 
     # returns false is failed to get client
