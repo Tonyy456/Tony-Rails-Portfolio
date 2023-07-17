@@ -5,7 +5,31 @@ class RunsController < ApplicationController
   # GET /runs or /runs.json
   def index
     @runs = Run.all
+    @runs = @runs.sort_by { |activity| activity[:date] }.reverse
+    @endDate = @runs.last.date
+    @startDate = @runs.first.date
   end
+
+  def upload_csv
+  end  
+
+
+
+  def parse_csv
+    require 'csv'
+    csv_file = params[:csv_file].tempfile
+    CSV.foreach(csv_file, headers: false) do |row|
+      date_str = row[0] 
+      distance = row[1].to_f
+      date = Date.strptime(date_str, '%m/%d/%y')
+      if(date != nil && distance != nil)
+        run = Run.new(date: date, distance: distance)
+        run.save
+      end
+    end
+    redirect_to runs_path, notice: 'CSV file uploaded and parsed successfully.'
+  end
+
 
   # GET /runs/1 or /runs/1.json
   def show

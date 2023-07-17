@@ -2,6 +2,10 @@
 
 <h1>Runs</h1>
 
+<p> 
+  DAY <%= sprintf('%.0f', @startDate - @endDate + 1) %>
+</p>
+
 <table class="table table-bordered table-stripped table-dark border-secondary table-sm" style="text-align: center">
   <thead>
     <tr>
@@ -14,9 +18,9 @@
   <tbody class="table-group-divider">
     <% @runs.each_with_index do |run, index| %>
     <tr style="vertical-align: middle;">
-      <th scope="row"> <%= index %> </th>
+      <th scope="row"> <%= @runs.length - index %> </th>
       <td> <%= run.date %> </td>
-      <td> <%= run.distance %> </td>
+      <td> <%= sprintf('%.2f', run.distance) %> </td>
 
       <td class="d-flex"> 
         <%= link_to "View", run, class: "btn btn-primary", style: "margin-right: 1em;"%>

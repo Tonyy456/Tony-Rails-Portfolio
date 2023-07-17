@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :runs
+  resources :runs do
+    collection do
+      post :parse_csv
+      get :upload_csv
+    end
+  end
   resources :home_videos, :except => [:edit, :show, :update]
   resources :pins
   devise_for :users, :skip => [:registrations], controllers: {
