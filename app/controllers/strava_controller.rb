@@ -3,6 +3,8 @@ class StravaController < ApplicationController
 
     # GET RUN LOG
     def index
+        @days_2023 = generate_weeks_for_year(1985)
+        @month_size_2023 = month_tabel_span(@days_2023)
     end
 
     # GET Make request for last 100 runs
@@ -90,6 +92,60 @@ class StravaController < ApplicationController
         strava_client = Strava::Api::Client.new(access_token: session[:access_token])
         return strava_client
     end
+
+    def month_tabel_span(year_array)
+        month_placements = []
+        week_lengths = year_array.length
+        current_month = 1;
+        current_length = 0;
+        year_array.each do |week|
+            week.each do |day|
+                if day == nil
+                    next
+                end
+                if(day.month > current_month)
+                    month_placements << current_length
+                    current_month = current_month + 1
+                    current_length = 0
+                    break
+                end
+            end
+            current_length = current_length + 1
+        end
+        month_placements << current_length # get december added on
+        month_placements
+    end
+    def generate_weeks_for_year(year)
+        start_date = Date.new(year, 1, 1)
+        end_date = Date.new(year, 12, 31)
+      
+        weeks = []
+
+        week_start = start_date
+        week_end = week_start.end_of_week(:sunday)
+        # puts '============='
+        # puts week_start.strftime('%A')
+        # puts week_end.strftime('%A')
+
+      
+        while week_start <= end_date
+          week_range = (week_start..week_end).to_a
+
+          if week_end.year != year
+            week_range = week_range.reverse.drop_while { |date| date.year != year }.reverse
+            week_range = week_range + Array.new(7 - week_range.length, nil) # pad to length 7 with nil
+          end
+          week_range = Array.new(7 - week_range.length, nil) + week_range
+          #weeks << week_range.map { |date| date.strftime('%a: %Y-%m-%d') }
+          weeks << week_range.map { |date| date ? date : nil }
+
+      
+          week_start = week_end + 1.day
+          week_end = week_start + 6.day
+        end
+      
+        weeks
+      end
   end
   
   

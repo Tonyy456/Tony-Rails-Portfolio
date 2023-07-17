@@ -13,8 +13,6 @@ class RunsController < ApplicationController
   def upload_csv
   end  
 
-
-
   def parse_csv
     require 'csv'
     csv_file = params[:csv_file].tempfile
