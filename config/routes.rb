@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get 'pin_test', to: 'pins#index'
   get 'ad', to: redirect('/users/sign_in')
 
+  get 'runlog', to: 'strava#index'
+
   root to: 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
