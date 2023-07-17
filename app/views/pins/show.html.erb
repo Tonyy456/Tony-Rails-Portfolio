@@ -21,4 +21,26 @@
   </div>
 </div>
 
+<%#
+  TO GET MARKDOWN LIKE TEXT @pin.body.to_trix_html
+
+  To get images: 
+  @pin.body.embeds_attachments.each do |image|
+  image_tag url_for(image)
+
+  to save this seems like you can throw all images in a folder,
+  save the markdown in a higher folder and then zip it all up:
+
+  rich_text/
+    images/
+        ...
+    rich_text.md
+
+  --->
+  
+  rich_text.zip
+
+  
+%>
+
 
