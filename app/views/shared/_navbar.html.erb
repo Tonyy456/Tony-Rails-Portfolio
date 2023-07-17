@@ -18,6 +18,9 @@
         <li class="nav-item">
           <%= link_to "Portfolio", portfolio_path, class: "nav-link"  %>
         </li>
+        <li class="nav-item">
+          <%= link_to "Runlog", runlog_path, class: "nav-link"  %>
+        </li>
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to "Admin Home", admin_path, class: "nav-link"  %>

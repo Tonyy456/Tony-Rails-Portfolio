@@ -1,9 +1,11 @@
 class StravaController < ApplicationController
     # before_action :admin_only, except: %i[index]
 
+    # def create_run
+    # end
+
     # GET RUN LOG
     def index
-        @runs = Run.all
     end
 
     # GET Make request for last 100 runs
