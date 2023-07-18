@@ -4,13 +4,16 @@ class StravaController < ApplicationController
     # GET RUN LOG
     def index
         @start = 2021
-        @end = 2023
+        @end = Date.today.year
         if (params[:year].present?)
-            @average = Run.where("extract(year from date) = ?", params[:year]).average(:distance)
+            runs_in_year = Run.where("extract(year from date) = ?", params[:year])
+            @average = runs_in_year.average(:distance)
+            @sum = runs_in_year.sum(:distance)
             @start = params[:year].to_i
             @end = params[:year].to_i
         else
             @average = Run.average(:distance)
+            @sum = Run.sum(:distance)
         end
     end
 
