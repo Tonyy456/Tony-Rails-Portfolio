@@ -6,8 +6,11 @@ class RunsController < ApplicationController
   def index
     @runs = Run.all
     @runs = @runs.sort_by { |activity| activity[:date] }.reverse
-    @endDate = @runs.last.date
-    @startDate = @runs.first.date
+
+    if(@runs.length > 0)
+      @endDate = @runs.last.date
+      @startDate = @runs.first.date
+    end
   end
 
   def upload_csv
