@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :runs do
+    collection do
+      post :parse_csv
+      get :upload_csv
+    end
+  end
   resources :home_videos, :except => [:edit, :show, :update]
   resources :pins
   devise_for :users, :skip => [:registrations], controllers: {
@@ -17,6 +23,11 @@ Rails.application.routes.draw do
   get 'home', to: 'home#index'
   get 'pin_test', to: 'pins#index'
   get 'ad', to: redirect('/users/sign_in')
+
+  get 'runlog', to: 'strava#index'                 # Tony's Runlog and runstreak tracker
+  get 'runlog/strava/recent', to: 'strava#recent' # most recent 100 runs. Must go through runlog/oauth
+  get 'runlog/oauth', to: 'strava#oauth'        # Redirects you to strava
+  get 'runlog/callback', to: 'strava#callback' # redirected to after runlog/oauth
 
   root to: 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -55,4 +55,22 @@ document.addEventListener('turbo:load', function() {
   first.play();
 })
 
+document.addEventListener('turbo:load', function() {
+  const hoverElement = document.querySelector('.hover-element');
+  const popup = document.createElement('div');
+  popup.className = 'popup';
+  hoverElement.appendChild(popup);
+  hoverElement.addEventListener('mouseenter', showPopup);
+  hoverElement.addEventListener('mouseleave', hidePopup);
+  function showPopup() {
+    const hoverText = hoverElement.textContent;
+    popup.textContent = `Text: ${hoverText}`;
+    popup.style.display = 'block';
+  }
+  function hidePopup() {
+    popup.style.display = 'none';
+  }
+
+})
+
 export { application }

@@ -41,6 +41,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+gem 'popper_js'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -75,3 +76,4 @@ gem "devise", "~> 4.9"
 gem "aws-sdk-s3", "~> 1.129", require: true
 gem 'jquery-rails'
 gem 'carrierwave', '~> 3.0'
+gem 'strava-ruby-client'

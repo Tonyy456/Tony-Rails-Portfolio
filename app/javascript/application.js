@@ -1,6 +1,7 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 //= require jquery
 //= require jquery_ujs
+//= require popper
 import "@hotwired/turbo-rails"
 import "controllers"
 import "trix"
@@ -18,4 +19,6 @@ ready = function() {
                   + currentdate.getSeconds();
   console.log(datetime);
 };
-$(document).on('turbo:load', ready);
+$(document).ready(function(){
+  $('[data-bs-toggle="tooltip"]').tooltip();
+});

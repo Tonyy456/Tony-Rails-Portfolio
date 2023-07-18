@@ -1,0 +1,35 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Runs</h1>
+
+<p> 
+  DAY <%= sprintf('%.0f', @startDate - @endDate + 1) %>
+</p>
+
+<table class="table table-bordered table-stripped table-dark border-secondary table-sm" style="text-align: center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Day</th>
+      <th scope="col">Distance</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <% @runs.each_with_index do |run, index| %>
+    <tr style="vertical-align: middle;">
+      <th scope="row"> <%= @runs.length - index %> </th>
+      <td> <%= run.date %> </td>
+      <td> <%= sprintf('%.2f', run.distance) %> </td>
+
+      <td class="d-flex"> 
+        <%= link_to "View", run, class: "btn btn-primary", style: "margin-right: 1em;"%>
+        <%= link_to "Edit", edit_run_path(run), class: "btn btn-primary", style: "margin-right: 1em;"%>
+        <%= button_to "Destroy", run, class: "col btn btn-primary", method: :delete, style:"margin-right: 1em;", :onclick => "return confirm('Are you sure?')" %>
+      </td>      
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New pin", new_run_path %>

@@ -5,3 +5,4 @@
 
 //= link jquery.min.js
 //= link jquery_ujs.js
+//= link popper.min.js
