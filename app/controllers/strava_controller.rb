@@ -3,7 +3,15 @@ class StravaController < ApplicationController
 
     # GET RUN LOG
     def index
-        
+        @start = 2021
+        @end = 2023
+        if (params[:year].present?)
+            @average = Run.where("extract(year from date) = ?", params[:year]).average(:distance)
+            @start = params[:year].to_i
+            @end = params[:year].to_i
+        else
+            @average = Run.average(:distance)
+        end
     end
 
     # GET Make request for last 100 runs

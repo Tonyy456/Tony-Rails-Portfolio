@@ -25,21 +25,19 @@ module StravaHelper
         if (run == nil)
             return "rgb(0,0,0)"
         end
-        distance = run.distance.to_i
+        distance = run.distance.to_f
         start_value = 255.0
-        end_value = 50.0
+        end_value = 40.0
         max_distance = 10.0
         min_distance = 0.0
+        if(distance > max_distance)
+            return "rgb(0,255, 200)"
+        end
         time = (max_distance - distance) / (max_distance - min_distance) 
         puts (time * 100)
         clamped_time = time.clamp(0, 1)
         interpolated_value = start_value + (end_value - start_value) * clamped_time
         "rgb(0,#{interpolated_value},0)"
-    end
-    def get_color_str_test(run)
-        if (run == nil)
-            return "rgb(0,0,0)"
-        end
     end
     def month_tabel_span(year_array)
         month_placements = []
@@ -65,33 +63,21 @@ module StravaHelper
     end
     def generate_weeks_for_year(year)
         start_date = Date.new(year, 1, 1)
-        end_date = Date.new(year, 12, 31)
-      
+        end_date = Date.new(year, 12, 31)     
         weeks = []
-
         week_start = start_date
-        week_end = week_start.end_of_week(:sunday)
-        # puts '============='
-        # puts week_start.strftime('%A')
-        # puts week_end.strftime('%A')
-
-      
+        week_end = week_start.end_of_week(:sunday)     
         while week_start <= end_date
           week_range = (week_start..week_end).to_a
-
           if week_end.year != year
             week_range = week_range.reverse.drop_while { |date| date.year != year }.reverse
             week_range = week_range + Array.new(7 - week_range.length, nil) # pad to length 7 with nil
           end
           week_range = Array.new(7 - week_range.length, nil) + week_range
-          #weeks << week_range.map { |date| date.strftime('%a: %Y-%m-%d') }
           weeks << week_range.map { |date| date ? date : nil }
-
-      
           week_start = week_end + 1.day
           week_end = week_start + 6.day
-        end
-      
+        end   
         weeks
       end
 end

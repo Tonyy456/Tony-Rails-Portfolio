@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'ad', to: redirect('/users/sign_in')
 
   get 'runlog', to: 'strava#index'                 # Tony's Runlog and runstreak tracker
+  get 'runlog/:year', to: 'strava#index'
   get 'runlog/strava/recent', to: 'strava#recent' # most recent 100 runs. Must go through runlog/oauth
   get 'runlog/oauth', to: 'strava#oauth'        # Redirects you to strava
   get 'runlog/callback', to: 'strava#callback' # redirected to after runlog/oauth

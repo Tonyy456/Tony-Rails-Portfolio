@@ -5,11 +5,35 @@
 <% end %>
 
 <br/>
+
+<% if params[:year].present? %>
+  <%= link_to "Previous Year", runlog_path(year: params[:year].to_i - 1) %>
+  <%= link_to "Next Year", runlog_path(year: params[:year].to_i + 1) %>
+<% end %>
+
 <br/>
+<br/>
+
+<p> Statistics: </p>
+<div id="visual-key">
+  <span> Less </span>
+  <span>
+    <div style="display: inline-block;width: 11px; height: 11px; background-color: rgb(0,50,0); border-radius: 3px;"> </div>
+    <div style="display: inline-block;width: 11px; height: 11px; background-color: rgb(0,120,0); border-radius: 3px;"> </div>
+    <div style="display: inline-block;width: 11px; height: 11px; background-color: rgb(0,200,0); border-radius: 3px;"> </div>
+    <div style="display: inline-block;width: 11px; height: 11px; background-color: rgb(0,255,0); border-radius: 3px;"> </div>
+  </span>
+  <span> More </span>
+  <br/>
+  <span> Over 13 miles </span>
+  <div style=" display: inline-block;width: 11px; height: 11px; background-color: rgb(0,255, 200); border-radius: 3px;"> </div>
+</div>
+
+<p> - average = <%= @average %> </p>
 
 <%# render partial: "github_partial" %>
 
-<% (2021..2023).each do |year| %>
+<% (@end..@start).each do |year| %>
 <% get_weeks_and_tabel(year) do |year_array, labels| %>
   <h1> <%= year %> </h1>
   <table role="grid" aria-readonly="true" class="ContributionCalendar-grid js-calendar-graph-table" style="border-spacing: 4px; overflow: hidden; position: relative" aria-describedby="contribution-graph-description">
