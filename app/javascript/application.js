@@ -9,8 +9,7 @@ import "trix"
 import "@rails/actiontext"
 import "jquery"
 import "jquery_ujs"
-var ready;
-ready = function() {
+function ready (){
   var currentdate = new Date(); 
   var datetime = "Swapped pages at: " + currentdate.getDate() + "/"
                   + (currentdate.getMonth()+1)  + "/" 
@@ -19,10 +18,6 @@ ready = function() {
                   + currentdate.getMinutes() + ":" 
                   + currentdate.getSeconds();
   console.log(datetime);
-};
-
-
-function ready (){
   $('[data-bs-toggle="tooltip"]').tooltip();
 }
 
