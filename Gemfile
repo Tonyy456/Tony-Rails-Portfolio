@@ -77,3 +77,5 @@ gem "aws-sdk-s3", "~> 1.129", require: true
 gem 'jquery-rails'
 gem 'carrierwave', '~> 3.0'
 gem 'strava-ruby-client'
+gem 'jquery-turbolinks'
+

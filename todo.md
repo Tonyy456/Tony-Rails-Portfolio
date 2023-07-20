@@ -1,4 +1,6 @@
-- [ ] style project admin page (make it smaller or something)
-- [ ] style show single pin page
-- [ ] style edit pin page
-- [ ] permission before_action that only works for certain pages?
+- Clean up credentials
+- Clean up partials that are not needed
+- Add partials if needed
+- Clean up all views in general
+- Clean up routes.rb
+- Clean up run strava stuff code.
