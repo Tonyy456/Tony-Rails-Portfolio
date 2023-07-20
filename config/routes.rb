@@ -15,24 +15,25 @@ Rails.application.routes.draw do
     put 'users' => 'devise/registrations#update', :as => 'user_registration'
   end
   
+  # testing
   get 'fileupload', to: 'home#fileupload'
   post 'upload', to: 'home#upload'
-
+  get 'pin_test', to: 'pins#index'
+  
+  # misc
   get 'admin', to: 'home#admin'
   get 'portfolio', to: 'portfolio#index'
   get 'home', to: 'home#index'
-  get 'pin_test', to: 'pins#index'
-  get 'ad', to: redirect('/users/sign_in')
-
-  get 'runlog', to: 'strava#index'                 # Tony's Runlog and runstreak tracker
-  get 'runlog/:year', to: 'strava#index'
-  get 'runlog/strava/recent', to: 'strava#recent' # most recent 100 runs. Must go through runlog/oauth
-  get 'runlog/oauth', to: 'strava#oauth'        # Redirects you to strava
-  get 'runlog/callback', to: 'strava#callback' # redirected to after runlog/oauth
-
+  
+  # Runlog Reading
+  get 'runlog', to: 'runs#log' 
+  get 'runlog/:year', to: 'runs#log'
+  
+  # Strava Controller
+  get 'runlog/strava/recent', to: 'strava#recent' 
+  get 'runlog/oauth', to: 'strava#oauth'     
+  get 'runlog/callback', to: 'strava#callback' 
+  
   root to: 'home#index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get 'ad', to: redirect('/users/sign_in')
 end

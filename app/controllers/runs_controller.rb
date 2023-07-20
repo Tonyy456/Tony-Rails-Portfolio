@@ -13,6 +13,22 @@ class RunsController < ApplicationController
     end
   end
 
+  # GET runlog_path ... /runlog
+  def log
+    @start = 2021
+    @end = Date.today.year
+    if (params[:year].present?)
+        runs_in_year = Run.where("extract(year from date) = ?", params[:year])
+        @average = runs_in_year.average(:distance)
+        @sum = runs_in_year.sum(:distance)
+        @start = params[:year].to_i
+        @end = params[:year].to_i
+    else
+        @average = Run.average(:distance)
+        @sum = Run.sum(:distance)
+    end
+  end
+
   def upload_csv
   end  
 
