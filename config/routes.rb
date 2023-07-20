@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     end
   end
   resources :home_videos, :except => [:edit, :show, :update]
-  resources :pins
+  resources :projects
   devise_for :users, :skip => [:registrations], controllers: {
     sessions: 'users/sessions',
   }
