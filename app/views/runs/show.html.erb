@@ -1,6 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @run %>
+  <table class="table table-striped table-hover table-bordered">
+    <thead>
+      <tr class="table-primary">
+        <th>Item</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @run.attributes.each_pair do |name, value| %>
+        <% if !(["id","created_at","updated_at"].include?(name))  %>
+          <tr> 
+            <td> <%= name %> </td> 
+            <td> <%= value %> </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 
 <div>
   <%= link_to "Edit this run", edit_run_path(@run) %> |

@@ -2,8 +2,19 @@ class RunsController < ApplicationController
   before_action :set_run, only: %i[ show edit update destroy ]
   before_action :admin_only
 
-  # GET /runs or /runs.json
+  # GET /runs
   def index
+    @runs = Run.all
+    @runs = @runs.sort_by { |activity| activity[:date] }.reverse
+
+    if(@runs.length > 0)
+      @endDate = @runs.last.date
+      @startDate = @runs.first.date
+    end
+  end
+
+  # GET /runs/manager
+  def manager
     @runs = Run.all
     @runs = @runs.sort_by { |activity| activity[:date] }.reverse
 
@@ -68,10 +79,8 @@ class RunsController < ApplicationController
     respond_to do |format|
       if @run.save
         format.html { redirect_to run_url(@run), notice: "Run was successfully created." }
-        format.json { render :show, status: :created, location: @run }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @run.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -81,10 +90,8 @@ class RunsController < ApplicationController
     respond_to do |format|
       if @run.update(run_params)
         format.html { redirect_to run_url(@run), notice: "Run was successfully updated." }
-        format.json { render :show, status: :ok, location: @run }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @run.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -95,7 +102,6 @@ class RunsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to runs_url, notice: "Run was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

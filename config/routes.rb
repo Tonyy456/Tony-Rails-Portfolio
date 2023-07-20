@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   end
 
   # models/run.rb CRUD
-  get '/runs', to: 'runs#index', as: 'runs'
+  get '/runs/manager', to: 'runs#manager', as: 'runs'
+  get '/runs', to: 'runs#index'
   post '/runs', to: 'runs#create'
   get '/runs/new', to: 'runs#new', as: 'new_run'
   post '/runs/parse_csv', to: 'runs#parse_csv' #need be before /runs/:id else error. find this rule first
