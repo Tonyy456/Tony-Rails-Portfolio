@@ -116,7 +116,7 @@ class StravaController < ApplicationController
             e.message # => Bad Request
             e.errors # => [{ 'code' => 'invalid', 'field' => 'code', 'resource' => 'RequestToken' }]
             e.headers # => { "status" => "403 Bad Request", "x-ratelimit-limit" => "600,30000", "x-ratelimit-usage" => "314,27536" }
-            redirect_to({ plain: e.message, error: e.errors, headers: e.headers }) and return
+            redirect_to plain: e and return
         end
         set_tokens(response)
         redirect_to root_path, notice: 'Tokens Generated Squirt'
