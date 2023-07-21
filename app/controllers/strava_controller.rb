@@ -103,6 +103,8 @@ class StravaController < ApplicationController
             scope: 'activity:read_all',
             state: 'magic'
         )
+        puts '########'
+        puts request.base_url + '/runlog/callback'
         redirect_to redirect_url, allow_other_host: true
     end
 
