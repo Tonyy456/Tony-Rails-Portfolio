@@ -1,12 +1,7 @@
 Rails.application.routes.draw do
-  resources :runs do
-    collection do
-      post :parse_csv
-      get :upload_csv
-    end
-  end
-  resources :home_videos, :except => [:edit, :show, :update]
-  resources :pins
+  # CRUD = Create Read Update Destroy
+
+  # models/user.rb
   devise_for :users, :skip => [:registrations], controllers: {
     sessions: 'users/sessions',
   }
@@ -14,25 +9,62 @@ Rails.application.routes.draw do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
     put 'users' => 'devise/registrations#update', :as => 'user_registration'
   end
+
+  # models/run.rb CRUD
+  get '/runs/manager', to: 'runs#manager', as: 'runs_manager'
+  get '/runs/calendar/:year/:month', to: 'runs#calendar', as: 'runs_calendar'
+  get '/runs/condensed', to: 'runs#condensed_view', as:'runs_condensed'
+  get '/runs', to: 'runs#index', as: 'runs'
+  get '/runs/refresh/login', to: 'strava#index', as: 'strava_login'
+
+  get '/runs/new', to: 'runs#new', as: 'new_run'
+  post '/runs/new', to: 'runs#create', as: 'new_run_post'
+
+  post '/runs/parse_csv', to: 'runs#parse_csv'
+  get '/runs/upload_csv', to: 'runs#upload_csv'
+  get 'runs/multi_delete', to: 'runs#multi_delete', as: 'multi_delete'
+  delete 'runs/multi_delete', to: 'runs#destroy_multiple', as: 'delete_multiple_runs'
+
+  get '/runs/:id/edit', to: 'runs#edit', as: 'edit_run'
+  patch '/runs/:id/edit', to: 'runs#update', as: 'edit_run_patch'
+  get '/runs/:id', to: 'runs#show', as: 'run'
+  delete '/runs/:id', to: 'runs#destroy', as: 'delete_run'
+
+  # models/home_video.rb CRUD
+  get '/home_videos', to: 'home_videos#index', as: 'home_videos'
+  post '/home_videos', to: 'home_videos#create'
+  get '/home_videos/new', to: 'home_videos#new', as: 'new_home_video'
+  delete '/home_videos/:id', to: 'home_videos#destroy', as: 'home_video'
+
+  # models/project.rb CRUD
+  get '/projects', to: 'projects#index', as: 'projects'
+  post '/projects', to: 'projects#create'
+  get '/projects/new', to: 'projects#new', as: 'new_project'
+  get '/projects/:id', to: 'projects#show', as: 'project'
+  get '/projects/:id/edit', to: 'projects#edit', as: 'edit_project'
+  patch '/projects/:id', to: 'projects#update'
+  put '/projects/:id', to: 'projects#update'
+  delete '/projects/:id', to: 'projects#destroy'
   
+  # Strava Controller does models/run.rb UPDATES
+  get 'runlog/strava/recent', to: 'strava#recent' , as: 'strava_recent'
+  get 'runlog/oauth', to: 'strava#oauth', as: 'strava_oauth'
+  get 'runlog/callback', to: 'strava#callback'
+  
+  # Runlog READ
+  get 'runlog', to: 'runs#log'
+  get 'runlog/:year', to: 'runs#log'
+
+  # Need updated/removed
   get 'fileupload', to: 'home#fileupload'
   post 'upload', to: 'home#upload'
-
+  get 'pin_test', to: 'pins#index'
   get 'admin', to: 'home#admin'
   get 'portfolio', to: 'portfolio#index'
   get 'home', to: 'home#index'
-  get 'pin_test', to: 'pins#index'
-  get 'ad', to: redirect('/users/sign_in')
 
-  get 'runlog', to: 'strava#index'                 # Tony's Runlog and runstreak tracker
-  get 'runlog/:year', to: 'strava#index'
-  get 'runlog/strava/recent', to: 'strava#recent' # most recent 100 runs. Must go through runlog/oauth
-  get 'runlog/oauth', to: 'strava#oauth'        # Redirects you to strava
-  get 'runlog/callback', to: 'strava#callback' # redirected to after runlog/oauth
-
+  get 'autologger', to: 'strava#auto_logger', as: 'autologger'
+  
   root to: 'home#index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get 'ad', to: redirect('/users/sign_in')
 end

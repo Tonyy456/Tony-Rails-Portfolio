@@ -1,27 +1,27 @@
 <h1>Tony's Project Portfolio!</h1>
 
 <% if user_signed_in? %>
-  <%= link_to pins_path do %>
+  <%= link_to projects_path do %>
     <%= button_tag "Manager", class: "btn btn-primary" , style: "margin-right: 1em;"%>
   <% end %>
 <% end %>
 
 <%# Flex Container. Children have class 'p-2' %>
 <div class="d-flex flex-row flex-wrap mb-3">
-  <% @pins.each do |pin| %>
+  <% @projects.each do |project| %>
     <div class="p-2">
       <div class="card" style="width: 18rem; border: 2px solid gray;">
-        <% if pin.image.content_type.in?(%w[image/jpeg image/png])%>
-          <%= link_to image_tag(pin.image, class: "card-img-top", style: "width: 100%; height: ;"), url_for(pin.image) if pin.image.attached? %>
+        <% if project.image.content_type.in?(%w[image/jpeg image/png])%>
+          <%= link_to image_tag(project.image, class: "card-img-top", style: "width: 100%; height: ;"), url_for(project.image) if project.image.attached? %>
           <hr />
         <% end %>
         <div class="card-body">
-          <h5 class="card-title"> <%= pin.title %> </h5>
+          <h5 class="card-title"> <%= project.title %> </h5>
           <p class="card-text"> project description. </p>
-          <% if pin[:use_link] %>
-            <%= link_to "View Project", pin.page, class: "btn btn-primary" %>
+          <% if project[:use_link] %>
+            <%= link_to "View Project", project.page, class: "btn btn-primary" %>
           <% else %>
-            <%= link_to "View Project", pin, class: "btn btn-primary" %>        
+            <%= link_to "View Project", project, class: "btn btn-primary" %>        
           <% end %>
         </div>
       </div>

@@ -1,0 +1,46 @@
+<p style="color: green"><%= notice %></p>
+<% if user_signed_in? %>
+  <div class="d-flex">
+    <%= render partial: "buttonget", locals: { text: "Manager", link: projects_path } %> 
+    <%= render partial: "buttonget", locals: { text: "Edit Project", link: edit_project_path(@project) } %> 
+    <%= button_to "Destroy this project", @project, class: "col btn btn-primary", method: :delete, style:"margin-right: 1em;", :onclick => "return confirm('Are you sure?')" %>
+  </div>
+  <br/>
+<% end %>
+<div class="p-5 mb-4 bg-body-tertiary rounded-3">
+  <div id="<%= dom_id @project %>">
+  <p class="display-6 fw-bold">
+    <%= @project.title %>
+  </p>
+  <br/>
+  <% if @project.image.content_type.in?(%w[image/jpeg image/png])%>
+    <%= link_to image_tag(@project.image_as_thumbnail), @project.image if @project.image.attached? %>
+    <hr />
+  <% end %>
+  <%= @project.body %>
+  </div>
+</div>
+
+<%#
+  TO GET MARKDOWN LIKE TEXT @project.body.to_trix_html
+
+  To get images: 
+  @project.body.embeds_attachments.each do |image|
+  image_tag url_for(image)
+
+  to save this seems like you can throw all images in a folder,
+  save the markdown in a higher folder and then zip it all up:
+
+  rich_text/
+    images/
+        ...
+    rich_text.md
+
+  --->
+  
+  rich_text.zip
+
+  
+%>
+
+

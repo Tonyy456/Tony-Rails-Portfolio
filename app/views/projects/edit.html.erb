@@ -1,13 +1,13 @@
-<h1>Editing pin</h1>
+<h1>Editing project</h1>
 
-<%# render "form", pin: @pin %>
+<%# render "form", project: @project %>
 
-<%= form_with(model: @pin, id: "rsvp") do |form| %>
-  <% if @pin.errors.any? %>
+<%= form_with(model: @project, id: "rsvp") do |form| %>
+  <% if @project.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(@pin.errors.count, "error") %> prohibited this pin from being saved:</h2>
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
       <ul>
-        <% @pin.errors.each do |error| %>
+        <% @project.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -49,6 +49,6 @@
 <br>
 
 <div>
-  <%= link_to "Show this project", @pin %> |
-  <%= link_to "Back to manager", pins_path %>
+  <%= link_to "Show this project", @project %> |
+  <%= link_to "Back to manager", projects_path %>
 </div>

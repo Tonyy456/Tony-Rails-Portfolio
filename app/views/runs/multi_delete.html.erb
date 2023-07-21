@@ -1,0 +1,17 @@
+<h1>Delete Multiple</h1>
+
+<%= form_with(url: delete_multiple_runs_path, method: :delete) do |form| %>
+  <div>
+    <%= form.label "Start", style: "display: block" %>
+    <%= form.date_field :start_date, value: Date.today %>
+  </div>
+
+    <div>
+    <%= form.label "End", style: "display: block" %>
+    <%= form.date_field :end_date, value: Date.today %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

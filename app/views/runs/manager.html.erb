@@ -5,12 +5,14 @@ License: MIT
 Displays all the runs for an admin to use
 %>
 <h1>Runs</h1>
+
+<%= link_to "Autolog test", autologger_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+<%= link_to "Strava Login", strava_login_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+
 <div class="d-flex" style="margin-bottom: 10px">
-  <% if user_signed_in? %>
-    <%= link_to "Manager", runs_manager_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
-  <% end %>
   <%= link_to "Runlog", runlog_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
   <%= link_to "Calendar", runs_calendar_path(year: Date.today.year, month: Date.today.month), class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+  <%= link_to "Single Column View", runs_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
   <%= link_to "Condensed View", runs_condensed_path, class: 'btn btn-primary' %> 
 </div>
 <table class="table table-bordered table-stripped table-dark border-secondary table-sm" style="text-align: center">
@@ -19,6 +21,7 @@ Displays all the runs for an admin to use
       <th scope="col">#</th>
       <th scope="col">Day</th>
       <th scope="col">Distance</th>
+      <th scope="col">Options </th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
@@ -27,6 +30,11 @@ Displays all the runs for an admin to use
       <th scope="row"> <%= @runs.length - index %> </th>
       <td> <%= run.date %> </td>
       <td> <%= sprintf('%.2f', run.distance) %> </td>  
+      <td class="d-flex"> 
+        <%= link_to "View", run, class: "btn btn-primary", style: "margin-right: 1em;"%>
+        <%= link_to "Edit", edit_run_path(run), class: "btn btn-primary", style: "margin-right: 1em;"%>
+        <%= button_to "Destroy", delete_run_path(run), class: "col btn btn-primary", method: :delete, style:"margin-right: 1em;", :onclick => "return confirm('Are you sure?')" %>
+      </td>  
     </tr>
     <% end %>
   </tbody>
