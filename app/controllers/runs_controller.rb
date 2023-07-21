@@ -1,6 +1,7 @@
 class RunsController < ApplicationController
   before_action :set_run, only: %i[ show edit update destroy ]
   before_action :admin_only
+  before_action :admin_refresh_runs
 
   # GET /runs
   def index
@@ -10,6 +11,37 @@ class RunsController < ApplicationController
     if(@runs.length > 0)
       @endDate = @runs.last.date
       @startDate = @runs.first.date
+    end
+  end
+
+  # GET
+  def multi_delete
+
+  end
+
+  # DELETE
+  def destroy_multiple
+    runs_within_date_range = Run.where(date: params[:start_date]..params[:end_date])
+    runs_within_date_range.each do |run|
+      run.destroy
+    end
+    redirect_to runlog_path
+  end
+
+  # GET /runs/calendar/:year/:month runs_calendar_path
+  def calendar
+    if(is_integer(params[:month]) && is_integer(params[:year]))
+      @month = params[:month].to_i
+      @year = params[:year].to_i
+      @start_date = Date.new(@year, @month, 1)
+      end_date = Date.new(@year, @month, -1)  
+      @range=(@start_date..end_date).to_a
+
+      # Put nil in calendar table spots where it should be
+      @range = Array.new(@range.first.wday, nil) + @range
+      @range.concat(Array.new(6 - @range.last.wday, nil))
+    else
+      render plain: "Invalid month and year."
     end
   end
 
@@ -29,6 +61,9 @@ class RunsController < ApplicationController
 
   # GET runlog_path ... /runlog
   def log
+    if user_signed_in? && params[:autologged] != "logged"
+      redirect_to autologger_path
+    end
     @start = 2021
     @end = Date.today.year
     if (params[:year].present?)
@@ -104,11 +139,16 @@ class RunsController < ApplicationController
     @run.destroy
 
     respond_to do |format|
-      format.html { redirect_to runs_url, notice: "Run was successfully destroyed." }
+      format.html { redirect_to runs_manager_url, notice: "Run was successfully destroyed." }
     end
   end
 
   private
+
+    def admin_refresh_runs
+
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_run
       @run = Run.find(params[:id])
@@ -117,5 +157,9 @@ class RunsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def run_params
       params.require(:run).permit(:date, :time, :distance)
+    end
+
+    def is_integer(i)
+      i.to_i.to_s == i;
     end
 end

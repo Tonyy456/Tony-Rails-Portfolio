@@ -11,19 +11,24 @@ Rails.application.routes.draw do
   end
 
   # models/run.rb CRUD
-  # read
-  get '/runs/manager', to: 'runs#manager', as: 'runs'
+  get '/runs/manager', to: 'runs#manager', as: 'runs_manager'
+  get '/runs/calendar/:year/:month', to: 'runs#calendar', as: 'runs_calendar'
   get '/runs/condensed', to: 'runs#condensed_view', as:'runs_condensed'
-  get '/runs', to: 'runs#index'
+  get '/runs', to: 'runs#index', as: 'runs'
+  get '/runs/refresh/login', to: 'strava#index', as: 'strava_login'
+
   get '/runs/new', to: 'runs#new', as: 'new_run'
   post '/runs/new', to: 'runs#create', as: 'new_run_post'
+
   post '/runs/parse_csv', to: 'runs#parse_csv'
   get '/runs/upload_csv', to: 'runs#upload_csv'
+  get 'runs/multi_delete', to: 'runs#multi_delete', as: 'multi_delete'
+  delete 'runs/multi_delete', to: 'runs#destroy_multiple', as: 'delete_multiple_runs'
+
   get '/runs/:id/edit', to: 'runs#edit', as: 'edit_run'
-  get '/runs/:id', to: 'runs#show', as: 'run'
   patch '/runs/:id/edit', to: 'runs#update', as: 'edit_run_patch'
-  put '/runs/:id', to: 'runs#update'
-  delete '/runs/:id', to: 'runs#destroy'
+  get '/runs/:id', to: 'runs#show', as: 'run'
+  delete '/runs/:id', to: 'runs#destroy', as: 'delete_run'
 
   # models/home_video.rb CRUD
   get '/home_videos', to: 'home_videos#index', as: 'home_videos'
@@ -41,14 +46,14 @@ Rails.application.routes.draw do
   put '/projects/:id', to: 'projects#update'
   delete '/projects/:id', to: 'projects#destroy'
   
-  # Runlog READ
-  get 'runlog', to: 'runs#log' 
-  get 'runlog/:year', to: 'runs#log'
-
   # Strava Controller does models/run.rb UPDATES
-  get 'runlog/strava/recent', to: 'strava#recent' 
-  get 'runlog/oauth', to: 'strava#oauth'     
-  get 'runlog/callback', to: 'strava#callback' 
+  get 'runlog/strava/recent', to: 'strava#recent' , as: 'strava_recent'
+  get 'runlog/oauth', to: 'strava#oauth', as: 'strava_oauth'
+  get 'runlog/callback', to: 'strava#callback'
+  
+  # Runlog READ
+  get 'runlog', to: 'runs#log'
+  get 'runlog/:year', to: 'runs#log'
 
   # Need updated/removed
   get 'fileupload', to: 'home#fileupload'
@@ -57,6 +62,8 @@ Rails.application.routes.draw do
   get 'admin', to: 'home#admin'
   get 'portfolio', to: 'portfolio#index'
   get 'home', to: 'home#index'
+
+  get 'autologger', to: 'strava#auto_logger', as: 'autologger'
   
   root to: 'home#index'
   get 'ad', to: redirect('/users/sign_in')

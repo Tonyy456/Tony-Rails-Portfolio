@@ -100,3 +100,23 @@ thead {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.custom-table {
+    width: 100%; /* Optional: Adjust the table width as needed */
+    border-collapse: collapse; /* Optional: Remove spacing between table cells */
+  
+    /* Add any other styles you need for the table, like font-size, etc. */
+  }
+  
+  .custom-table th,
+  .custom-table td {
+    width: 50px;
+    height: 50px;
+    text-align: center; /* Optional: Center the content horizontally */
+    vertical-align: middle; /* Optional: Center the content vertically */
+    border: 1px solid black; /* Optional: Add borders around cells */
+    
+    /* Add any other styles you need for the table cells */
+    /* e.g., background-color, font-size, etc. */
+  }
+  

@@ -1,0 +1,73 @@
+<div class="d-flex" style="margin-bottom: 10px;">
+  <% if user_signed_in? %>
+    <%= link_to "Manager", runs_manager_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+  <% end %>
+  <%= link_to "Runlog", runlog_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+  <%= link_to "Single Column", runs_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+  <%= link_to "Condensed View", runs_condensed_path, class: 'btn btn-primary' %> 
+</div>
+<div style="text-align: center; height: calc(75vw + 25vh); max-height: 100vh; width: 100%; margin-bottom: 100px">
+    <div style="vertical-align: middle; height: 20%; display: flex; justify-content: space-between; align-items: flex-end;">
+        <h1 style="margin-right: 10px; color: red;"> <%= @start_date.strftime("%B") %> <%= @year%> </h1>
+        <div>
+            <div class="btn-group" style="margin-right: 10px;">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Month
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% (0..11).each do |i| %>
+                        <% d = Date.new(@year, i + 1, 1) %>
+                        <%= link_to d.strftime("%B"), runs_calendar_path(year: d.year, month: d.month), class: "dropdown-item" %>
+                    <% end %>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Year
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% (-2..2).each do |i| %>
+                        <% d = Date.new(@year + i, @month, 1) %>
+                        <%= link_to d.strftime("%Y"), runs_calendar_path(year: d.year, month: d.month), class: "dropdown-item" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <table class="table table-bordered table-striped table-dark border-secondary table-sm" style="text-align: center; height: 80%; margin-bottom: 0px; z-index: -999;">
+        <thead>
+            <tr>
+            <th scope="col">Su</th>
+            <th scope="col">M</th>
+            <th scope="col">T</th>
+            <th scope="col">W</th>
+            <th scope="col">Th</th>
+            <th scope="col">F</th>
+            <th scope="col">S</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <% (0..((@range.length / 7).floor - 1)).each do |w| %>
+                <tr style="height: 50px; overflow: hidden;">
+                    <% (0..6).each do |d| %>
+                        <% item = @range[7*w + d]%>
+                        <% if item != nil %>
+                            <% run = Run.where(date: item).first %>
+                            <td style="width: 50px; overflow: hidden;"> 
+                                <div style="width: 100%; height: 20%; text-align: left; font-size: calc(0.6vw + 0.6vh); color: rgb(225,255,255);">
+                                    <%= item.day %>
+                                </div>
+                                <div style="width: 100%; height: 60%; font-size: calc(0.75vw + 0.75vh); text-align: center; vertical-align: middle; display: flex; align-content: center; position: relative; flex-wrap: nowrap; justify-content: center; align-items: center;">
+                                    <%= run == nil ? "0" : run.distance %> mi
+                                </div>
+                            </td>
+                        <% else %>
+                            <td> </td>
+                        <% end %>
+                    <% end %>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

@@ -34,7 +34,6 @@ module StravaHelper
             return "rgb(0,255, 200)"
         end
         time = (max_distance - distance) / (max_distance - min_distance) 
-        puts (time * 100)
         clamped_time = time.clamp(0, 1)
         interpolated_value = start_value + (end_value - start_value) * clamped_time
         "rgb(0,#{interpolated_value},0)"

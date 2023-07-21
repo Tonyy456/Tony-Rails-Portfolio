@@ -22,6 +22,5 @@
 <div>
   <%= link_to "Edit this run", edit_run_path(@run) %> |
   <%= link_to "Back to runs", runs_path %>
-
-  <%= button_to "Destroy this run", @run, method: :delete %>
+  <%= button_to "Destroy this run", delete_run_path(@run), method: :delete, :onclick => "return confirm('Are you sure?')" %>
 </div>

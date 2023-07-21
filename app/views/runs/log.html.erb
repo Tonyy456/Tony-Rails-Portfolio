@@ -5,7 +5,14 @@ License: MIT
 Displays runlog like a github contribution calendar
 %>
 <h1> Run Log </h1>
-<%= link_to "Condensed View", runs_condensed_path, class: 'btn btn-primary' %> <br/> <br/>
+<div class="d-flex" style="margin-bottom: 10px">
+  <% if user_signed_in? %>
+    <%= link_to "Manager", runs_manager_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+  <% end %>
+  <%= link_to "Calendar", runs_calendar_path(year: Date.today.year, month: Date.today.month), class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+  <%= link_to "Single Column View", runs_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+  <%= link_to "Condensed View", runs_condensed_path, class: 'btn btn-primary' %> 
+</div>
 <p>
   <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
       Statistics
@@ -122,7 +129,7 @@ Displays runlog like a github contribution calendar
                         data-bs-toggle="tooltip" 
                         data-bs-placement="top"
                         data-bs-custom-class="custom-tooltip"
-                        data-bs-title="<%= run != nil ? run.distance : 0.0  %> on <%= get_date_str(day) %>"
+                        data-bs-title="<%= run != nil ? run.distance.round(2) : 0.0  %> on <%= get_date_str(day) %>"
                         >
                         <span class="sr-only"></span>
                         </td>

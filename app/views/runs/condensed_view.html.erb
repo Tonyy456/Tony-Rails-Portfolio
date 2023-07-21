@@ -5,6 +5,14 @@ License: MIT
 Displays the runs in a format for the admin
 %>
 <h1>Runs</h1>
+<div class="d-flex" style="margin-bottom: 10px">
+  <% if user_signed_in? %>
+    <%= link_to "Manager", runs_manager_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+  <% end %>
+  <%= link_to "Runlog", runlog_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+  <%= link_to "Calendar", runs_calendar_path(year: Date.today.year, month: Date.today.month), class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+  <%= link_to "Single Column View", runs_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
+</div>
 <table class="table table-bordered table-striped table-dark border-secondary table-sm" style="text-align: center">
   <thead>
     <tr>

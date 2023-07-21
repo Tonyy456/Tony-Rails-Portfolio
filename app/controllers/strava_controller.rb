@@ -1,28 +1,94 @@
 class StravaController < ApplicationController
-    # before_action :admin_only, except: %i[index]
+    before_action :admin_only
 
-    # GET RUN LOG
+    # Admin Login
     def index
-        @start = 2021
-        @end = Date.today.year
-        if (params[:year].present?)
-            runs_in_year = Run.where("extract(year from date) = ?", params[:year])
-            @average = runs_in_year.average(:distance)
-            @sum = runs_in_year.sum(:distance)
-            @start = params[:year].to_i
-            @end = params[:year].to_i
-        else
-            @average = Run.average(:distance)
-            @sum = Run.sum(:distance)
+        
+    end
+
+    # GET redirect fun redirect to this and it will do all the work.
+    def auto_logger
+        client = Strava::OAuth::Client.new( client_id: ENV['STRAVA_ID'], client_secret: ENV['STRAVA_CLIENT_SECRET'])
+        if(!current_user)
+            redirect_to root_path, alert: "No current user" and return
         end
+        if(current_user.refresh_token_strava == nil || current_user.access_token_strava == nil || current_user.expires_at_strava == nil)
+            redirect_to root_path, alert: "Didnt autolog. Tokens empty." and return
+        end
+        puts current_user.expires_at_strava == nil
+        if(current_user.expires_at_strava < DateTime.current)
+            response = client.oauth_token(grant_type: 'refresh_token', refresh_token: current_user.refresh_token_strava)    
+            set_tokens(response)
+        end
+        strava_client = Strava::Api::Client.new(access_token: current_user.access_token_strava)
+
+        toadd = {}
+        strava_client.athlete_activities.each do |activity|
+            datetime = activity.start_date.to_datetime
+            datetime_est = datetime.in_time_zone('Eastern Time (US & Canada)')
+            date = datetime.to_date
+            date_est = datetime_est.to_date
+            puts date
+
+            distance = (activity.distance * 0.0006213712)
+
+            next if Run.exists?(date: date_est)
+            if toadd[date_est]
+                toadd[date_est][:distance] += distance
+            else
+                toadd[date_est] = {date: date_est, distance: distance}
+            end
+            # toadd << {date: date, distance: distance}
+        end
+        toadd = toadd.values
+
+        #render json: toadd
+        toadd.each do |item|
+            #puts item
+            Run.create(item)
+        end
+
+        redirect_to runlog_path(autologged: "logged"), notice: "Logged #{toadd.length} values to the run log!"
     end
 
     # GET Make request for last 100 runs
     def recent
-        admin_only
         strava_client = get_strava_client
         if(strava_client)
             @recent_activities = get_activities(strava_client, 100)
+            cutoff_date = Run.order(date: :desc).first.date
+
+            # Get only runs past latest run date.
+            filtered_activities = @recent_activities.select do |activity|
+                date = activity[:date].to_date
+                date > Date.new(2023, 6, 1)
+            end
+
+            combined_activities = {}
+            filtered_activities.each do |entry|
+                date = entry[:date].to_date
+                distance = entry[:distance]   
+                if combined_activities[date]
+                    combined_activities[date][:distance] += distance
+                    puts combined_activities[date][:distance]
+                else
+                    puts "oh"
+                    combined_activities[date] = {date: date, distance: distance}
+                end
+            end
+            combined_activities = combined_activities.values
+
+            combined_activities.each do |act|
+                puts act
+                match = nil
+                match = Run.where(date: act[:date]).first
+                if !match
+                    Run.create(act)
+                end
+            end
+            redirect_to runlog_path
+        else
+            render plain: "Failed"
         end
     end
 
@@ -46,7 +112,7 @@ class StravaController < ApplicationController
         client = get_client
         response = client.oauth_token(grant_type: 'authorization_code', code: params[:code])
         set_tokens(response)
-        redirect_to runlog_strava_recent_path
+        redirect_to root_path, notice: 'Tokens Generated Squirt'
     end
 
     private 
@@ -78,6 +144,14 @@ class StravaController < ApplicationController
         session[:access_token] = response.access_token
         session[:refresh_token] = response.refresh_token
         session[:access_expiration] = response.expires_at
+
+        if current_user
+            puts 'Set this'
+            current_user.refresh_token_strava = response.refresh_token
+            current_user.access_token_strava = response.access_token
+            current_user.expires_at_strava = response.expires_at.to_datetime.in_time_zone('Eastern Time (US & Canada)')
+            current_user.save
+        end
     end
 
     def get_client
