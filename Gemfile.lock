@@ -294,6 +294,7 @@ DEPENDENCIES
   carrierwave (~> 3.0)
   debug
   devise (~> 4.9)
+  faraday
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
