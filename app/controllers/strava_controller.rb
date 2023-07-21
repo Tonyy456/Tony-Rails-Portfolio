@@ -113,7 +113,7 @@ class StravaController < ApplicationController
         begin 
             response = client.oauth_token(grant_type: 'authorization_code', code: params[:code])
         rescue => e
-            redirect_to root_path, alert: e.message
+            redirect_to root_path, alert: e.message and return
         end
         set_tokens(response)
         redirect_to root_path, notice: 'Tokens Generated Squirt'
