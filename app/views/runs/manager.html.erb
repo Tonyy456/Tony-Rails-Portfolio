@@ -2,7 +2,7 @@
 Author: Anthony D'Alesandro
 License: MIT
 
-Displays the runs in a format for the admin
+Displays all the runs for an admin to use
 %>
 <h1>Runs</h1>
 
@@ -12,7 +12,7 @@ Displays the runs in a format for the admin
       <th scope="col">#</th>
       <th scope="col">Day</th>
       <th scope="col">Distance</th>
-      <th colspan="1"></th>
+      <th scope="col">Options </th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
@@ -20,15 +20,12 @@ Displays the runs in a format for the admin
     <tr style="vertical-align: middle;">
       <th scope="row"> <%= @runs.length - index %> </th>
       <td> <%= run.date %> </td>
-      <td> <%= sprintf('%.2f', run.distance) %> </td>
-
+      <td> <%= sprintf('%.2f', run.distance) %> </td>  
       <td class="d-flex"> 
-        <span>
-          <%= button_to "X", run, class: "col btn btn-danger", method: :delete, style:"margin-right: 1em;", :onclick => "return confirm('Are you sure?')" %>
-        </span>
         <%= link_to "View", run, class: "btn btn-primary", style: "margin-right: 1em;"%>
         <%= link_to "Edit", edit_run_path(run), class: "btn btn-primary", style: "margin-right: 1em;"%>
-      </td>      
+        <%= button_to "Destroy", run, class: "col btn btn-primary", method: :delete, style:"margin-right: 1em;", :onclick => "return confirm('Are you sure?')" %>
+      </td>  
     </tr>
     <% end %>
   </tbody>

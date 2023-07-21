@@ -1,0 +1,55 @@
+<%# 
+Author: Anthony D'Alesandro
+License: MIT
+
+Displays the runs in a format for the admin
+%>
+<h1>Runs</h1>
+<table class="table table-bordered table-striped table-dark border-secondary table-sm" style="text-align: center">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 10%">Sunday</th>
+      <th scope="col" style="width: 10%">Monday</th>
+      <th scope="col" style="width: 10%">Tuesday</th>
+      <th scope="col" style="width: 10%">Wednesday</th>
+      <th scope="col" style="width: 10%">Thursday</th>
+      <th scope="col" style="width: 10%">Friday</th>
+      <th scope="col" style="width: 10%">Saturday</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <tr> 
+      <% (0..6).each do |d| %>
+        <td> <%= @start_date + d.days %> </td>
+      <% end %>
+    </tr>
+    <tr>
+      <% (0..6).each do |d| %>
+        <% if d < @start_pad_count%>
+          <td> 0mi </td>
+        <% else %>
+          <td> <%= @runs[d].distance %> mi </td>
+        <% end %>     
+      <% end %>
+    </tr>
+
+    <% (1..((@runs.length / 7)).ceil).each do |w| %>
+      <tr>
+        <% (0..6).each do |d| %>
+          <td> <%= @start_date - (w).weeks + d.days %> </td>
+        <% end %>
+      </tr>
+      <tr>
+        <% (0..6).each do |d| %>
+          <% if @runs.length > 7 * w + d%>
+            <td> <%= @runs[7 * w + d].distance %> </td>
+          <% else  %>
+            <td> 0mi </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Run", new_run_path %>

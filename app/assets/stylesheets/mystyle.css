@@ -70,3 +70,33 @@ thead {
     outline: 1px solid rgb(40, 44, 40);
     outline-offset: -1px;
 }
+
+/* Overlay styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #212529;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Spinner styles (using Bootstrap's spinner) */
+.spinner {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    border: 3px solid rgba(255,255,255, 0.4);
+    border-radius: 50%;
+    border-top: 3px solid #ffffff;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

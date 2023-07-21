@@ -11,15 +11,17 @@ Rails.application.routes.draw do
   end
 
   # models/run.rb CRUD
+  # read
   get '/runs/manager', to: 'runs#manager', as: 'runs'
+  get '/runs/condensed', to: 'runs#condensed_view', as:'runs_condensed'
   get '/runs', to: 'runs#index'
-  post '/runs', to: 'runs#create'
   get '/runs/new', to: 'runs#new', as: 'new_run'
-  post '/runs/parse_csv', to: 'runs#parse_csv' #need be before /runs/:id else error. find this rule first
+  post '/runs/new', to: 'runs#create', as: 'new_run_post'
+  post '/runs/parse_csv', to: 'runs#parse_csv'
   get '/runs/upload_csv', to: 'runs#upload_csv'
   get '/runs/:id/edit', to: 'runs#edit', as: 'edit_run'
   get '/runs/:id', to: 'runs#show', as: 'run'
-  patch '/runs/:id', to: 'runs#update'
+  patch '/runs/:id/edit', to: 'runs#update', as: 'edit_run_patch'
   put '/runs/:id', to: 'runs#update'
   delete '/runs/:id', to: 'runs#destroy'
 

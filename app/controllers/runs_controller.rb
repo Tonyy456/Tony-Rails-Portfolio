@@ -13,15 +13,18 @@ class RunsController < ApplicationController
     end
   end
 
+  # GET /runs/condensed
+  def condensed_view
+    @runs = Run.all.order(date: :desc)
+    first = @runs.first
+    @start_pad_count = @runs.first.date.wday
+    @start_date = first.date - @start_pad_count.days
+    @runs = Array.new(@start_pad_count, nil) + @runs
+  end
+
   # GET /runs/manager
   def manager
-    @runs = Run.all
-    @runs = @runs.sort_by { |activity| activity[:date] }.reverse
-
-    if(@runs.length > 0)
-      @endDate = @runs.last.date
-      @startDate = @runs.first.date
-    end
+    @runs = Run.all.order(date: :desc)
   end
 
   # GET runlog_path ... /runlog
@@ -62,17 +65,17 @@ class RunsController < ApplicationController
   # GET /runs/1 or /runs/1.json
   def show
   end
-
+  
+  # GET /runs/1/edit
+  def edit
+  end
+  
   # GET /runs/new
   def new
     @run = Run.new
   end
-
-  # GET /runs/1/edit
-  def edit
-  end
-
-  # POST /runs or /runs.json
+  
+  # POST /runs/new or /runs.json
   def create
     @run = Run.new(run_params)
 
@@ -80,7 +83,7 @@ class RunsController < ApplicationController
       if @run.save
         format.html { redirect_to run_url(@run), notice: "Run was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        render plain: "failed"
       end
     end
   end

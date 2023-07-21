@@ -23,3 +23,11 @@ function ready (){
 
 $(document).ready(ready)
 $(document).on('turbo:load', ready)
+
+$(document).on("turbo:click", function(){
+  $(".overlay").show();
+});
+
+$(document).on("turbo:load", function(){
+  $(".overlay").hide();
+});
