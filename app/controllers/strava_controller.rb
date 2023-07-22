@@ -54,6 +54,7 @@ class StravaController < ApplicationController
       else
         puts '########################### I hate this sh*t'
         puts activities.present?
+        return response
       end
       activities.first if response.success? && activities.present?
     end
