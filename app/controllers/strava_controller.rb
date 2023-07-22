@@ -115,8 +115,11 @@ class StravaController < ApplicationController
     def callback
         admin_only
         client = get_client
+        # maybe update production v developement to set callback url
+        # https vs http might be important
+        puts params[:code]
         begin 
-            response = client.oauth_token(grant_type: 'authorization_code', code: params[:code])
+            response = client.oauth_token(code: params[:code])
         rescue => e
             redirect_to root_path, alert: e.message and return
         end
