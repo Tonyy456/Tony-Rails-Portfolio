@@ -113,7 +113,8 @@ class StravaController < ApplicationController
     def client
         Strava::OAuth::Client.new( 
             client_id: ENV['STRAVA_ID'], 
-            client_secret: ENV['STRAVA_CLIENT_SECRET'])
+            client_secret: ENV['STRAVA_CLIENT_SECRET']
+        )
     end
 
     def strava_url_1
