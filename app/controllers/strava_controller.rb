@@ -107,7 +107,7 @@ class StravaController < ApplicationController
         #     scope: 'activity:read_all',
         #     state: 'magic'
         # )
-        redirect_to strava_url_1, allow_other_host: true
+        redirect_to strava_url_2, allow_other_host: true
     end
 
     def client
@@ -128,7 +128,7 @@ class StravaController < ApplicationController
 
     def strava_url_2
         client.authorize_url(
-            redirect_uri: "https://www.antdev.cc/runlog/callback",
+            redirect_uri: ENV['STRAVA_REDIRECT_URI'],
             approval_prompt: 'force',
             response_type: 'code',
             scope: 'profile:read_all,activity:read_all',
