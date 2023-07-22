@@ -1,6 +1,6 @@
 class RunsController < ApplicationController
   before_action :set_run, only: %i[ show edit update destroy ]
-  before_action :admin_only
+  before_action :admin_only, except: [:log]
   before_action :admin_refresh_runs
 
   # GET /runs
