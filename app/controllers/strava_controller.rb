@@ -40,11 +40,7 @@ class StravaController < ApplicationController
     end
   
     def get_first_activity(access_token)
-      response = HTTParty.get(
-        'https://www.strava.com/api/v3/athlete/activities',
-        headers: {
-          'Authorization' => "Bearer #{access_token}"
-        }
+      response = HTTParty.get(`https://www.strava.com/api/v3/athlete/activities?before=&after=&page=&per_page=" "Authorization: Bearer [[#{access_token}]]`
       )
       activities = JSON.parse(response.body)
       activities.first if response.success? && activities.present?
