@@ -118,11 +118,12 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.12.0)
-    faraday (1.2.0)
-      multipart-post (>= 1.2, < 3)
-      ruby2_keywords
-    faraday_middleware (1.2.0)
-      faraday (~> 1.0)
+    faraday (2.7.10)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (3.0.2)
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
@@ -246,10 +247,10 @@ GEM
     ssrf_filter (1.1.1)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    strava-ruby-client (0.4.3)
+    strava-ruby-client (2.0.0)
       activesupport
-      faraday (>= 1.0.0)
-      faraday_middleware
+      faraday (>= 2.0)
+      faraday-multipart (>= 1.0)
       hashie
     thor (1.2.2)
     timeout (0.4.0)
@@ -287,16 +288,12 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activesupport
   aws-sdk-s3 (~> 1.129)
   bootsnap
   capybara
   carrierwave (~> 3.0)
   debug
   devise (~> 4.9)
-  faraday (>= 1.0.0)
-  faraday_middleware
-  hashie
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
@@ -309,7 +306,7 @@ DEPENDENCIES
   selenium-webdriver
   sprockets-rails
   stimulus-rails
-  strava-ruby-client
+  strava-ruby-client (~> 2.0.0)
   turbo-rails
   tzinfo-data
   web-console

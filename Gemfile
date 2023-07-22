@@ -44,16 +44,13 @@ gem "bootsnap", require: false
 gem 'popper_js'
 
 #gem 'activesupport', '>= 7.0.6'
-gem 'activesupport'
-
-# gem 'faraday', '>= 2.7.10'
-gem 'faraday', '>= 1.0.0'
-
-
+#gem 'faraday', '>= 1.0.0'
 #gem 'faraday_middleware', '>= 1.2.0'
 #gem 'hashie', '>= 5.0.0'
-gem 'faraday_middleware'
-gem 'hashie'
+# gem 'hashie'
+# gem 'faraday_middleware'
+# gem 'faraday', '>= 2.0'
+# gem 'activesupport'
 
 
 # Use Sass to process CSS
@@ -89,6 +86,6 @@ gem "devise", "~> 4.9"
 gem "aws-sdk-s3", "~> 1.129", require: true
 gem 'jquery-rails'
 gem 'carrierwave', '~> 3.0'
-gem 'strava-ruby-client'
+gem 'strava-ruby-client', '~> 2.0.0'
 gem 'jquery-turbolinks'
 
