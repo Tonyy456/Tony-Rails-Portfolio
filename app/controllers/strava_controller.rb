@@ -107,7 +107,11 @@ class StravaController < ApplicationController
         #     scope: 'activity:read_all',
         #     state: 'magic'
         # )
-        redirect_to strava_url_2, allow_other_host: true
+        begin
+            redirect_to strava_url_2, allow_other_host: true
+        rescue => e
+            redirect_to root_path, alert: e.message
+        end
     end
 
     def client
