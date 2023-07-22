@@ -95,20 +95,38 @@ class StravaController < ApplicationController
 
     # GET Authenticate. Admin only
     def oauth
-        admin_only
-        client = get_client
-        redirect_url = client.authorize_url(
+        #admin_only
+        puts '########'
+        puts request.base_url + '/runlog/callback'
+        puts OpenSSL::OPENSSL_VERSION
+        # client = get_client
+        # redirect_url = client.authorize_url(
+        #     redirect_uri: "https://www.antdev.cc/runlog/callback",
+        #     approval_prompt: 'force',
+        #     response_type: 'code',
+        #     scope: 'activity:read_all',
+        #     state: 'magic'
+        # )
+        redirect_to strava_url_1, allow_other_host: true
+    end
+
+    def strava_url_1
+        client.authorize_url(
             redirect_uri: "https://www.antdev.cc/runlog/callback",
             approval_prompt: 'force',
             response_type: 'code',
             scope: 'activity:read_all',
+        )
+    end
+
+    def strava_url_2
+        client.authorize_url(
+            redirect_uri: "https://www.antdev.cc/runlog/callback",
+            approval_prompt: 'force',
+            response_type: 'code',
+            scope: 'profile:read_all,activity:read_all',
             state: 'magic'
         )
-        puts '########'
-        puts request.base_url + '/runlog/callback'
-        puts OpenSSL::OPENSSL_VERSION
-
-        redirect_to redirect_url, allow_other_host: true
     end
 
     # GET callback after oauth
