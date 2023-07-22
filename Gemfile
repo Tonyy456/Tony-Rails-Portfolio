@@ -43,17 +43,17 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem 'popper_js'
 
-# Use the specified version of ActiveSupport
-gem 'activesupport', '>= 7.0.6'
+#gem 'activesupport', '>= 7.0.6'
+gem 'activesupport'
 
-# Use the specified version of Faraday
-gem 'faraday', '>= 2.7.10'
+# gem 'faraday', '>= 2.7.10'
+gem 'faraday', '>= 1.0.0'
 
-# Use the specified version of Faraday Middleware
-gem 'faraday_middleware', '>= 1.2.0'
 
-# Use the specified version of Hashie
-gem 'hashie', '>= 5.0.0'
+#gem 'faraday_middleware', '>= 1.2.0'
+#gem 'hashie', '>= 5.0.0'
+gem 'faraday_middleware'
+gem 'hashie'
 
 
 # Use Sass to process CSS
