@@ -110,6 +110,12 @@ class StravaController < ApplicationController
         redirect_to strava_url_1, allow_other_host: true
     end
 
+    def client
+        Strava::OAuth::Client.new( 
+            client_id: ENV['STRAVA_ID'], 
+            client_secret: ENV['STRAVA_CLIENT_SECRET'])
+    end
+
     def strava_url_1
         client.authorize_url(
             redirect_uri: ENV['STRAVA_REDIRECT_URI'],
