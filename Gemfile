@@ -42,7 +42,18 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 gem 'popper_js'
-gem 'faraday'
+
+# Use the specified version of ActiveSupport
+gem 'activesupport', '>= 7.0.6'
+
+# Use the specified version of Faraday
+gem 'faraday', '>= 2.7.10'
+
+# Use the specified version of Faraday Middleware
+gem 'faraday_middleware', '>= 1.2.0'
+
+# Use the specified version of Hashie
+gem 'hashie', '>= 5.0.0'
 
 
 # Use Sass to process CSS
