@@ -18,7 +18,7 @@ class StravaController < ApplicationController
       access_token = exchange_code_for_token(code)
       if access_token
         activity = get_first_activity(access_token)
-        render json: activity
+        render json: {response: activity, accesss_token_response: access_token}
       else
         render json: { error: 'Failed to get access token from Strava' }, status: :unprocessable_entity
       end
@@ -36,6 +36,7 @@ class StravaController < ApplicationController
           grant_type: 'authorization_code'
         }
       )
+
       response['access_token'] if response.success?
     end
   
@@ -43,9 +44,7 @@ class StravaController < ApplicationController
         puts access_token
       response = HTTParty.get(
         'https://www.strava.com/api/v3/athlete/activities',
-        headers: {
-          'Authorization' => "Bearer #{access_token}"
-        }
+        headers: { "Authorization" => "Bearer #{access_token}" }
       )
       activities = JSON.parse(response.body)
       if response.success?
