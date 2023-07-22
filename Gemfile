@@ -52,6 +52,10 @@ gem 'popper_js'
 # gem 'faraday'
 # gem 'activesupport'
 
+# Gemfile
+gem 'httparty'
+
+
 
 # Use Sass to process CSS
 # gem "sassc-rails"

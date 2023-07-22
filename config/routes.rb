@@ -48,8 +48,8 @@ Rails.application.routes.draw do
   
   # Strava Controller does models/run.rb UPDATES
   get 'runlog/strava/recent', to: 'strava#recent' , as: 'strava_recent'
-  get 'runlog/oauth', to: 'strava#oauth', as: 'strava_oauth'
-  get 'runlog/callback', to: 'strava#callback'
+  get 'runlog/oauth', to: 'strava#authorize', as: 'strava_oauth'
+  get 'runlog/callback', to: 'strava#callback2'
   
   # Runlog READ
   get 'runlog', to: 'runs#log'

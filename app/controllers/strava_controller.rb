@@ -2,6 +2,56 @@ require 'strava-ruby-client'
 class StravaController < ApplicationController
     before_action :admin_only
 
+    require 'httparty'
+
+    # Replace these values with your Strava application credentials
+    CLIENT_ID = ENV['STRAVA_ID']
+    CLIENT_SECRET = ENV['STRAVA_CLIENT_SECRET']
+    REDIRECT_URI = ENV['STRAVA_REDIRECT_URI']
+  
+    def authorize
+      redirect_to "https://www.strava.com/oauth/authorize?client_id=#{CLIENT_ID}&response_type=code&redirect_uri=#{REDIRECT_URI}&scope=read_all"
+    end
+  
+    def callback2
+      code = params[:code]
+      access_token = exchange_code_for_token(code)
+      if access_token
+        activity = get_first_activity(access_token)
+        render json: activity
+      else
+        render json: { error: 'Failed to get access token from Strava' }, status: :unprocessable_entity
+      end
+    end
+  
+    private
+  
+    def exchange_code_for_token(code)
+      response = HTTParty.post(
+        'https://www.strava.com/oauth/token',
+        body: {
+          client_id: CLIENT_ID,
+          client_secret: CLIENT_SECRET,
+          code: code,
+          grant_type: 'authorization_code'
+        }
+      )
+      response['access_token'] if response.success?
+    end
+  
+    def get_first_activity(access_token)
+      response = HTTParty.get(
+        'https://www.strava.com/api/v3/athlete/activities',
+        headers: {
+          'Authorization' => "Bearer #{access_token}"
+        }
+      )
+      activities = JSON.parse(response.body)
+      activities.first if response.success? && activities.present?
+    end
+
+    # ##############################################################
+
     # Admin Login
     def index
         
