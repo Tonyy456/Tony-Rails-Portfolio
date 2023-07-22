@@ -10,7 +10,7 @@ class StravaController < ApplicationController
     REDIRECT_URI = ENV['STRAVA_REDIRECT_URI']
   
     def authorize
-      redirect_to "https://www.strava.com/oauth/authorize?client_id=#{CLIENT_ID}&response_type=code&redirect_uri=#{REDIRECT_URI}&scope=read_all"
+      redirect_to "https://www.strava.com/oauth/authorize?client_id=#{CLIENT_ID}&response_type=code&redirect_uri=#{REDIRECT_URI}&scope=read_all", allow_other_host: true
     end
   
     def callback2
