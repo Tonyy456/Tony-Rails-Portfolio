@@ -49,7 +49,7 @@ gem 'popper_js'
 #gem 'hashie', '>= 5.0.0'
 # gem 'hashie'
 # gem 'faraday_middleware'
-# gem 'faraday', '>= 2.0'
+# gem 'faraday'
 # gem 'activesupport'
 
 
