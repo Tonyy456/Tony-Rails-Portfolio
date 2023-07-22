@@ -48,6 +48,13 @@ class StravaController < ApplicationController
         }
       )
       activities = JSON.parse(response.body)
+      if response.success?
+        puts '########################### Well it succeeded!'
+        puts activities.present?
+      else
+        puts '########################### I hate this sh*t'
+        puts activities.present?
+      end
       activities.first if response.success? && activities.present?
     end
 
