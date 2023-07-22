@@ -1,3 +1,4 @@
+require 'strava-ruby-client'
 class StravaController < ApplicationController
     before_action :admin_only
 
@@ -97,7 +98,7 @@ class StravaController < ApplicationController
         admin_only
         client = get_client
         redirect_url = client.authorize_url(
-            redirect_uri: request.base_url + '/runlog/callback',
+            redirect_uri: "https://www.antdev.cc/runlog/callback",
             approval_prompt: 'force',
             response_type: 'code',
             scope: 'activity:read_all',
