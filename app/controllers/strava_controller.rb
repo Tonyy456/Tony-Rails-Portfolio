@@ -105,6 +105,8 @@ class StravaController < ApplicationController
         )
         puts '########'
         puts request.base_url + '/runlog/callback'
+        puts OpenSSL::OPENSSL_VERSION
+
         redirect_to redirect_url, allow_other_host: true
     end
 
