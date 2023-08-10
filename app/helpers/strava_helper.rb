@@ -31,7 +31,7 @@ module StravaHelper
         max_distance = 10.0
         min_distance = 0.0
         if(distance > max_distance)
-            return "rgb(0,255, 200)"
+            return "rgb(255,255,0)"
         end
         time = (max_distance - distance) / (max_distance - min_distance) 
         clamped_time = time.clamp(0, 1)

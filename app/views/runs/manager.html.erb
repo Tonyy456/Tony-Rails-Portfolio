@@ -5,10 +5,6 @@ License: MIT
 Displays all the runs for an admin to use
 %>
 <h1>Runs</h1>
-
-<%= link_to "Autolog test", autologger_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
-<%= link_to "Strava Login", strava_login_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
-
 <div class="d-flex" style="margin-bottom: 10px">
   <%= link_to "Runlog", runlog_path, class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
   <%= link_to "Calendar", runs_calendar_path(year: Date.today.year, month: Date.today.month), class: 'btn btn-primary', style: 'margin-right: 5px;' %> 
