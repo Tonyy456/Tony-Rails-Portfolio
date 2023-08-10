@@ -68,6 +68,8 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
+  ENV['STRAVA_REDIRECT_URI'] = "http://127.0.0.1:3000/runlog/callback"
+
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # FOR IMAGE PROCESSING VIPS TO MAGIK
   # config.active_storage.variant_processor = :mini_magick

@@ -61,9 +61,6 @@ class RunsController < ApplicationController
 
   # GET runlog_path ... /runlog
   def log
-    if user_signed_in? && params[:autologged] != "logged"
-      redirect_to autologger_path
-    end
     @start = 2021
     @end = Date.today.year
     if (params[:year].present?)
