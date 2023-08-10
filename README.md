@@ -45,3 +45,7 @@ rails db:migrate assets:precompile
 ```sh
 rails server
 ```
+
+# Potential Future Features
+- database backup (dont want to add a bunch of projects and lose random work)
+- Grocery List Maker
