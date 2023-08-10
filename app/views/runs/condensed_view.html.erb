@@ -36,7 +36,7 @@ Displays the runs in a format for the admin
         <% if d < @start_pad_count%>
           <td> 0mi </td>
         <% else %>
-          <td> <%= @runs[d].distance %> mi </td>
+          <td> <%= sprintf("%.2f", @runs[d].distance) %> mi </td>
         <% end %>     
       <% end %>
     </tr>
@@ -50,7 +50,7 @@ Displays the runs in a format for the admin
       <tr>
         <% (0..6).each do |d| %>
           <% if @runs.length > 7 * w + d%>
-            <td> <%= @runs[7 * w + d].distance %> </td>
+            <td> <%= sprintf("%.2f", @runs[7 * w + d].distance) %> </td>
           <% else  %>
             <td> 0mi </td>
           <% end %>
