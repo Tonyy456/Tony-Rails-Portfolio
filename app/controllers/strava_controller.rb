@@ -28,8 +28,8 @@ class StravaController < ApplicationController
           activities.each do |act|
             add_activity(act)
           end
-          message = activities.length > 0 ? "retrieved #{activities.length} new runs from #{activities.first[:date]} to #{activities.last[:date]}"
-                                          : "retrieved 0 runs"
+          message = activities.length > 0 ? "retrieved expired?#{access_token_expired}-#{activities.length} new runs from #{activities.first[:date]} to #{activities.last[:date]}"
+                                          : "expired?#{access_token_expired}-retrieved 0 runs"
           redirect_to runlog_path, notice: message
         else
           redirect_to runlog_path, alert: "failed to retrieve new runs"
@@ -51,6 +51,12 @@ class StravaController < ApplicationController
           grant_type: 'authorization_code'
         }
       )
+      if response.success?
+        set_tokens(response)
+        return response['access_token']
+      else
+        return nil
+      end
       response['access_token'] if response.success?
     end
 
@@ -108,16 +114,27 @@ class StravaController < ApplicationController
         time.in_time_zone('Eastern Time (US & Canada)')
     end
 
-    def set_tokens(response)
-        session[:access_token] = response.access_token
-        session[:refresh_token] = response.refresh_token
-        session[:access_expiration] = response.expires_at
+    def access_token_expired
+      if current_user
+        expires_at = current_user.expires_at_strava
+        if expires_at.is_a?(String)
+          expires_at = Time.parse(expires_at)
+        elsif !expires_at.is_a?(Time)
+          return "Not a time or a string!"
+        end
+        return "#{Time.now} >= #{expires_at}"
+      end
+      "not logged in!"
+    end
 
+    def set_tokens(response)
+        # session[:access_token] = response['access_token']
+        # session[:refresh_token] = response['refresh_token']
+        # session[:access_expiration] = response['expires_at']
         if current_user
-            puts 'Set this'
-            current_user.refresh_token_strava = response.refresh_token
-            current_user.access_token_strava = response.access_token
-            current_user.expires_at_strava = response.expires_at.to_datetime.in_time_zone('Eastern Time (US & Canada)')
+            current_user.refresh_token_strava = response['refresh_token']
+            current_user.access_token_strava = response['access_token']
+            current_user.expires_at_strava = response['expires_at'].to_datetime.in_time_zone('Eastern Time (US & Canada)')
             current_user.save
         end
     end
