@@ -2,6 +2,7 @@ class StravaController < ApplicationController
     before_action :admin_only
 
     require 'httparty'
+    require 'ostruct'
 
     # Replace these values with your Strava application credentials
     CLIENT_ID = ENV['STRAVA_ID']
@@ -15,7 +16,69 @@ class StravaController < ApplicationController
 
     # get which redirects
     def oauth
+      # try to fetch strava api and new runs. if succeeded stop, else execute code below
+      response = attempt_run_retrieve
+      if response && response.success # FIX: why tf can it return a object or boolean
+        redirect_to runlog_path, notice: response.message and return
+      end
       redirect_to "https://www.strava.com/oauth/authorize?client_id=#{CLIENT_ID}&response_type=code&redirect_uri=#{REDIRECT_URI}&scope=activity:read_all", allow_other_host: true
+    end
+
+    def attempt_run_retrieve
+      if token_present
+        if access_token_expired
+          # refresh it
+          response = HTTParty.post(
+            'https://www.strava.com/api/v3/oauth/token',
+            body: {
+              client_id: CLIENT_ID,
+              client_secret: CLIENT_SECRET,
+              refresh_token: current_user.refresh_token_strava,
+              grant_type: 'refresh_token'
+            }
+          )
+          if response.success?
+            puts response
+            set_tokens(response)
+            # retrieve runs
+            response = parse_runs(current_user.access_token_strava)
+            return response
+          else
+            return false
+          end
+        end
+
+      end
+      return false
+    end
+
+    def token_present
+      if current_user
+        if !current_user.refresh_token_strava ||
+           !current_user.access_token_strava ||
+           !current_user.expires_at_strava
+          return false
+        end
+        return true
+      end
+      return false
+    end
+
+    def parse_runs(access_token)
+      activities = get_new_activities(access_token)
+      response = OpenStruct.new
+      if activities
+        # add activities
+        activities.each do |act|
+          add_activity(act)
+        end
+        response.success = true
+        response.message = "retrieved #{activities.length} runs"
+      else
+        response.success = false
+        response.message = "failed to retrieve new runs"
+      end
+      return response
     end
   
     # get callback
@@ -23,16 +86,11 @@ class StravaController < ApplicationController
       code = params[:code]
       access_token = token_exchange(code)
       if access_token
-        activities = get_new_activities(access_token)
-        if activities
-          activities.each do |act|
-            add_activity(act)
-          end
-          message = activities.length > 0 ? "retrieved expired?#{access_token_expired}-#{activities.length} new runs from #{activities.first[:date]} to #{activities.last[:date]}"
-                                          : "expired?#{access_token_expired}-retrieved 0 runs"
-          redirect_to runlog_path, notice: message
+        response = parse_runs(access_token)
+        if response.success
+          redirect_to runlog_path, notice: response.message
         else
-          redirect_to runlog_path, alert: "failed to retrieve new runs"
+          redirect_to runlog_path, alert: response.message
         end
       else
         redirect_to runlog_path, alert: "failed to complete token exchange"
@@ -119,22 +177,21 @@ class StravaController < ApplicationController
         expires_at = current_user.expires_at_strava
         if expires_at.is_a?(String)
           expires_at = Time.parse(expires_at)
-        elsif !expires_at.is_a?(Time)
-          return "Not a time or a string!"
+        elsif expires_at.is_a?(Time)
+          return true
         end
-        return "#{Time.now} >= #{expires_at}"
+        # true if time is later than expiration
+        # false if time is less
+        return Time.now >= expires_at
       end
-      "not logged in!"
+      return true
     end
 
     def set_tokens(response)
-        # session[:access_token] = response['access_token']
-        # session[:refresh_token] = response['refresh_token']
-        # session[:access_expiration] = response['expires_at']
-        if current_user
+        if current_user && response.success?
             current_user.refresh_token_strava = response['refresh_token']
             current_user.access_token_strava = response['access_token']
-            current_user.expires_at_strava = response['expires_at'].to_datetime.in_time_zone('Eastern Time (US & Canada)')
+            current_user.expires_at_strava = Time.now.in_time_zone('Eastern Time (US & Canada)') + response['expires_at'].seconds 
             current_user.save
         end
     end
