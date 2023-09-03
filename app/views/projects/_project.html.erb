@@ -6,6 +6,12 @@
 
   <br/>
 
+  <% project.tags.each do |tag| %>
+    <%= tag.name %> <br/>
+  <% end %>
+
+  <br/>
+
   <% if project.image.content_type.in?(%w[image/jpeg image/png])%>
     <%= link_to image_tag(project.image_as_thumbnail), project.image if project.image.attached? %>
     <hr />

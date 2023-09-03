@@ -20,6 +20,11 @@
   </div>  <br/>
 
   <div>
+    <%= form.label "Tags", style: "display: block; font-size: 1.5em;" %>
+    <%= form.text_field :tags_to_use, value: @current_tags %>
+  </div> <br/>
+
+  <div>
     <%= form.label "Cover Image", style: "display: block; font-size: 1.5em;", class: "form-label" %>
     <%= form.file_field :image, class: "form-control" %>
   </div> <br/>

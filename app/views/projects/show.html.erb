@@ -13,6 +13,15 @@
     <%= @project.title %>
   </p>
   <br/>
+  <% @project.tags.each do |tag| %>
+    <% properties = get_tag_colors %>
+      <div style="background: rgb(<%=properties[:background]%>); color: rgb(<%=properties[:text]%>); padding: 5px; border-radius: 5px; width: fit-content; display: table-cell; vertical-align: middle; padding-right: 5px;">
+        <div style="#position: relative; #top: -50%">
+          <%= tag.name %>
+        </div>
+      </div>
+  <% end %>
+  <br/>
   <% if @project.image.content_type.in?(%w[image/jpeg image/png])%>
     <%= link_to image_tag(@project.image_as_thumbnail), @project.image if @project.image.attached? %>
     <hr />
