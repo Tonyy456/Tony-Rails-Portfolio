@@ -2,6 +2,9 @@ class Project < ApplicationRecord
     has_one_attached :image
     has_rich_text :body
 
+    has_many :project_tags
+    has_many :tags, through: :project_tags  
+
     def image_as_thumbnail
         return unless image.content_type.in?(%w[image/jpeg image/png])
         image.variant(resize_to_limit: [300,300]).processed
