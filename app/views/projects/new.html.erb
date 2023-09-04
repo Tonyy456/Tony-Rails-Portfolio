@@ -14,7 +14,7 @@
   <% end %>
   <div>
     <%= form.label "Project Title", style: "display: block; font-size: 1.5em;" %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title,  class: "form-control" %>
   </div>
 
   <br/>
@@ -22,7 +22,7 @@
   <%# form to add new tags%>
   <div>
     <%= form.label "Tags", style: "display: block; font-size: 1.5em;" %>
-    <%= form.text_field :tags_to_use, value: @current_tags %>
+    <%= form.text_field :tags_to_use, value: @current_tags,  class: "form-control" %>
   </div>
   <br/>
   <div>

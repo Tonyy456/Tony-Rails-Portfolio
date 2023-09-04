@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     tags = params[:project][:tags_to_use]
-    @project.tags << tags.split(',').map { |tag_name| Tag.find_or_create_by(name: tag_name.strip) }
+    @project.tags << tags.split(',').map { |tag_name| Tag.find_or_create_by(name: tag_name.strip.upcase) }
 
     ActiveRecord::Base.connection_pool.with_connection do
       respond_to do |format|

@@ -25,8 +25,8 @@
   </div>  <br/>
 
   <div>
-    <%= form.label "Tags", style: "display: block; font-size: 1.5em;" %>
-    <%= form.text_field :tags_to_use, value: @current_tags %>
+    <%= form.label "Tags", style: "display: block; font-size: 1.5em;", class: "form-label" %>
+    <%= form.text_field :tags_to_use, value: @current_tags, class: "form-control"  %>
   </div> <br/>
 
   <div>
@@ -48,6 +48,8 @@
     <%= form.label :page, style: "display: block; font-size: 1.5em;", class: "form-label" %>
     <%= form.text_field :page, class: "form-control" %>
   </div>
+
+  <br/>
 
   <div id="turn_off_form_checkbox">
     <div>

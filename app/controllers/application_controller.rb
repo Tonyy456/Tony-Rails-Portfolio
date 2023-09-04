@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
     end
 
     def clean_up_blobs
-        puts "ENQUEUE PURGE JOB"
-        puts ActiveStorage::Blob.unattached.where("active_storage_blobs.created_at > ?", 2.minutes.ago)
         ActiveStorage::Blob.unattached.where("active_storage_blobs.created_at > ?", 2.minutes.ago).find_each(&:purge_later)
     end
 
