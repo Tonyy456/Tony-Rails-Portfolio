@@ -50,10 +50,16 @@ class ProjectsController < ApplicationController
   def update
 
     tags = params[:project][:tags_to_use]
+    remove_image = params[:project][:remove_image]
+
     @project.tags.clear
     @project.tags << tags.split(',').map { |tag_name| Tag.find_or_create_by(name: tag_name.strip.upcase) }
     # remove unneccesary tags. no associated projects
     Tag.includes(:projects).where(projects: { id: nil }).destroy_all
+
+    if remove_image == '1'
+      @project.image = nil
+    end
     
 
 
@@ -87,6 +93,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:title, :image, :body, :use_link, :page) #pictures: [])
+      params.require(:project).permit(:title, :image, :body, :use_link, :page, :description) #pictures: [])
     end
 end

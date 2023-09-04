@@ -20,6 +20,11 @@
   </div>  <br/>
 
   <div>
+    <%= form.label "Description", class: "form-label", style: "display: block; font-size: 1.5em;" %>
+    <%= form.text_field :description, class: "form-control" %>
+  </div>  <br/>
+
+  <div>
     <%= form.label "Tags", style: "display: block; font-size: 1.5em;" %>
     <%= form.text_field :tags_to_use, value: @current_tags %>
   </div> <br/>
@@ -27,7 +32,12 @@
   <div>
     <%= form.label "Cover Image", style: "display: block; font-size: 1.5em;", class: "form-label" %>
     <%= form.file_field :image, class: "form-control" %>
-  </div> <br/>
+  </div> 
+  <div class="field">
+    <%= form.label :remove_image %>
+    <%= form.check_box :remove_image %>
+  </div>
+  <br/>
 
   <div>
     <%= form.label :use_link, style: "display: block; font-size: 1.5em;", class: "form-label" %>
