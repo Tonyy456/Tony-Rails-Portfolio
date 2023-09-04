@@ -12,11 +12,7 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <% Tag.all.each do |i| %>
-          <% if is_a_param("filter_in", i.name) %>
-            <%= link_to i.name, hash_path({filter_in: i.name}), class: "dropdown-item", style: "color: red;" %>
-          <% else %>
-            <%= link_to i.name, hash_path({filter_in: i.name}), class: "dropdown-item", style: "color: white;" %>   
-          <% end %>
+          <%= link_to i.name, hash_path({filter_in: i.name}), class: "dropdown-item", style: is_a_param("filter_in", i.name) ? "color: red;" :  "color: white;" %>
         <% end %>
     </div>
 </div>
@@ -26,11 +22,7 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <% Tag.all.each do |i| %>
-          <% if is_a_param("filter_out", i.name) %>
-            <%= link_to i.name, hash_path({filter_out: i.name}), class: "dropdown-item", style: "color: red;" %>
-          <% else %>
-            <%= link_to i.name, hash_path({filter_out: i.name}), class: "dropdown-item", style: "color: white;" %>   
-          <% end %>
+          <%= link_to i.name, hash_path({filter_out: i.name}), class: "dropdown-item", style: is_a_param("filter_out", i.name) ? "color: red;" : "color: white;" %>
         <% end %>
     </div>
 </div>
@@ -40,11 +32,7 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <% ["Started", "Completed", "Biggest Team", "Smallest Team", "Time Taken", "Most Work", "Least Work"].each do |i| %>
-          <% if is_a_param("sort", i) %>
-            <%= link_to i, hash_path({sort: i}), class: "dropdown-item", style: "color: red;" %>
-          <% else %>
-            <%= link_to i, hash_path({sort: i}), class: "dropdown-item", style: "color: white;" %>   
-          <% end %>
+          <%= link_to i, hash_path({sort: i}, true), class: "dropdown-item", style: is_a_param("sort", i) ? "color: red;" : "color: white;" %>
         <% end %>
     </div>
 </div>
