@@ -1,6 +1,6 @@
 class PortfolioController < ApplicationController
+  # get /portfolio params: filter:array-string, sort:string, 
   def index
-    puts "Testing I can log stuff here"
     clean_up_blobs
     @projects = Project.all
   end

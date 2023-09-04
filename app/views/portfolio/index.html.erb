@@ -5,6 +5,51 @@
     <%= button_tag "Manager", class: "btn btn-primary" , style: "margin-right: 1em;"%>
   <% end %>
 <% end %>
+<br/> <br/>
+<div class="btn-group" style="margin-right: 10px;">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Filter For
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% Tag.all.each do |i| %>
+          <% if is_a_param("filter_in", i.name) %>
+            <%= link_to i.name, hash_path({filter_in: i.name}), class: "dropdown-item", style: "color: red;" %>
+          <% else %>
+            <%= link_to i.name, hash_path({filter_in: i.name}), class: "dropdown-item", style: "color: white;" %>   
+          <% end %>
+        <% end %>
+    </div>
+</div>
+<div class="btn-group" style="margin-right: 10px;">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Filter Out
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% Tag.all.each do |i| %>
+          <% if is_a_param("filter_out", i.name) %>
+            <%= link_to i.name, hash_path({filter_out: i.name}), class: "dropdown-item", style: "color: red;" %>
+          <% else %>
+            <%= link_to i.name, hash_path({filter_out: i.name}), class: "dropdown-item", style: "color: white;" %>   
+          <% end %>
+        <% end %>
+    </div>
+</div>
+<div class="btn-group" style="margin-right: 10px;">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% ["Started", "Completed", "Biggest Team", "Smallest Team", "Time Taken", "Most Work", "Least Work"].each do |i| %>
+          <% if is_a_param("sort", i) %>
+            <%= link_to i, hash_path({sort: i}), class: "dropdown-item", style: "color: red;" %>
+          <% else %>
+            <%= link_to i, hash_path({sort: i}), class: "dropdown-item", style: "color: white;" %>   
+          <% end %>
+        <% end %>
+    </div>
+</div>
+
+
 
 <%# Flex Container. Children have class 'p-2' %>
 <div class="d-flex flex-row flex-wrap mb-3">
