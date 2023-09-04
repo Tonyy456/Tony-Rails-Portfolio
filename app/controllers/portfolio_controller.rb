@@ -46,5 +46,28 @@ class PortfolioController < ApplicationController
 
 
     # check if there is a sort
+    # sorted_people = people.sort_by { |person| [person.age, -person.name] }
+    # Started, Completed, Biggest Team, Smallest Team, Time Taken, Most Work, Least Work
+    if params.include?("sort")
+      sort_by = params[:sort].strip
+      case sort_by
+      when "Started"
+        @projects = @projects.sort_by { |project| project.started }
+      when "Completed"
+        @projects = @projects.sort_by { |project| project.completed }
+      when "Biggest Team"
+        @projects = @projects.sort_by { |project| project.teamsize }.reverse
+      when "Smallest Team"
+        @projects = @projects.sort_by { |project| project.teamsize }
+      when "Time Taken"
+        @projects = @projects.sort_by { |project| project.time_taken }.reverse
+      when "Most Work"
+        @projects = @projects.sort_by { |project| project.work_taken }
+      when "Least Work"
+        @projects = @projects.sort_by { |project| project.work_taken }
+      else
+        # do nothing
+      end
+    end
   end
 end

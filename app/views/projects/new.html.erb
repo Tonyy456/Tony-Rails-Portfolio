@@ -25,6 +25,31 @@
     <%= form.text_field :tags_to_use, value: @current_tags,  class: "form-control" %>
   </div>
   <br/>
+
+  <div class="field">
+    <%= form.label :started, style: "display: block; font-size: 1.5em;" %>
+    <%= form.date_field :started,  class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :completed, style: "display: block; font-size: 1.5em;" %>
+    <%= form.date_field :completed,  class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :teamsize, style: "display: block; font-size: 1.5em;" %>
+    <%= form.number_field :teamsize,  class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_taken, style: "display: block; font-size: 1.5em;" %>
+    <%= form.number_field :time_taken,  class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :work_taken, style: "display: block; font-size: 1.5em;" %>
+    <%= form.number_field :work_taken,  class: "form-control" %>
+  </div>
   <div>
     <%= form.label "Description", class: "form-label", style: "display: block; font-size: 1.5em;" %>
     <%= form.text_field :description, class: "form-control" %>

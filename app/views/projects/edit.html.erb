@@ -39,6 +39,31 @@
   </div>
   <br/>
 
+    <div class="field">
+    <%= form.label :started, style: "display: block; font-size: 1.5em;" %>
+    <%= form.date_field :started,  class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :completed, style: "display: block; font-size: 1.5em;" %>
+    <%= form.date_field :completed,  class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :teamsize, style: "display: block; font-size: 1.5em;" %>
+    <%= form.number_field :teamsize,  class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_taken, style: "display: block; font-size: 1.5em;" %>
+    <%= form.number_field :time_taken,  class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :work_taken, style: "display: block; font-size: 1.5em;" %>
+    <%= form.number_field :work_taken,  class: "form-control" %>
+  </div>
+
   <div>
     <%= form.label :use_link, style: "display: block; font-size: 1.5em;", class: "form-label" %>
     <%= form.check_box :use_link, id: "use_link_checkbox", class: "form-check" %>

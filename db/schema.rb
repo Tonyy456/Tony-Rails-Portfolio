@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_001219) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_04_155246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_001219) do
     t.boolean "use_link", default: false, null: false
     t.string "page", default: ""
     t.string "description"
+    t.date "started"
+    t.date "completed"
+    t.integer "teamsize"
+    t.integer "time_taken"
+    t.integer "work_taken"
   end
 
   create_table "runs", force: :cascade do |t|
