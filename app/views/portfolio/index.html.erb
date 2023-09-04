@@ -1,4 +1,4 @@
-<h1>Tony's Project Portfolio!</h1>
+
 
 <% if user_signed_in? %>
   <%= link_to projects_path do %>
@@ -6,6 +6,20 @@
   <% end %>
 <% end %>
 <br/> <br/>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+  <% ["Software Engineering", "Game Dev"].each do |name| %>
+    <% btn_class = is_a_param("tab",name) ? "btn btn-success" : "btn btn-outline-success" %>
+    <button type="button" class="<%=btn_class%>" style="margin-right: 3px">
+      <%= link_to name, hash_path({tab: name}, true), style: "text-decoration: none; color: white;" %>
+    </button>
+  <% end %>
+</div>
+<br/><br/>
+
+<h1>Tony's Project Portfolio!</h1>
+
+<%# FILTER FOR GROUP %>
 <div class="btn-group" style="margin-right: 10px;">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Filter For
@@ -16,6 +30,8 @@
         <% end %>
     </div>
 </div>
+
+<%# FILTER OUT GROUP %>
 <div class="btn-group" style="margin-right: 10px;">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Filter Out
@@ -26,6 +42,8 @@
         <% end %>
     </div>
 </div>
+
+<%# SORT GROUP %>
 <div class="btn-group" style="margin-right: 10px;">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Sort
@@ -37,6 +55,7 @@
     </div>
 </div>
 
+<br/> <br/>
 
 
 <%# Flex Container. Children have class 'p-2' %>
