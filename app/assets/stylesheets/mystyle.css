@@ -9,6 +9,9 @@
 .banner-container {
     height: 45vh; 
     overflow: hidden;
+    width: 100vw;
+    position: absolute;
+    left: 0px;
 }
 .banner-container video
 {

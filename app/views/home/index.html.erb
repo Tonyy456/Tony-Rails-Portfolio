@@ -1,2 +1,16 @@
+<% if current_page?(root_url) && HomeVideo.all.length > 0 %>
+    <div class="banner-container">       
+        <% HomeVideo.all.shuffle.each_with_index do |video, index| %>
+            <video muted playsinline id="banner-video-<%= index %>" style='display: none;'>
+                <source 
+                    src=<%= url_for(video.video) %> 
+                    type=<%= video.get_type %> >
+            </video>
+        <% end %>      
+    </div>
+<% end %>
+<div style="height: 45vh; margin-bottom: 10px;">
+
+</div>
 <h1> Tony D'Alesandro </h1>
 
