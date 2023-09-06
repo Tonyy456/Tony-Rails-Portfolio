@@ -30,6 +30,13 @@ class PortfolioController < ApplicationController
       end
     end
 
+    if @completed_only
+      filtered_projects = @projects.select do |project|
+        project.is_completed
+      end
+      @projects = filtered_projects
+    end
+
     # check if there is a tab to filter for
     if params.include?("tab")
       tab_value = params[:tab]
