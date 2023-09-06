@@ -35,6 +35,11 @@
     <%= form.label :completed, style: "display: block; font-size: 1.5em;" %>
     <%= form.date_field :completed,  class: "form-control" %>
   </div>
+  <br/>
+  <div>
+    <%= form.label :is_completed, style: "display: block; font-size: 1.5em;", class: "form-label" %>
+    <%= form.check_box :is_completed, class: "form-check" %>
+  </div> <br/>
 
   <div class="field">
     <%= form.label :teamsize, style: "display: block; font-size: 1.5em;" %>

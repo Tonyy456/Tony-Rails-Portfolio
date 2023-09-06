@@ -1,5 +1,5 @@
 
-
+<br/>
 <% if user_signed_in? %>
   <%= link_to projects_path do %>
     <%= button_tag "Manager", class: "btn btn-primary" , style: "margin-right: 1em;"%>
@@ -21,39 +21,49 @@
 
 <%# FILTER FOR GROUP %>
 <div class="btn-group" style="margin-right: 10px;">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-<%=get_class(@fi_tags.count)%> dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Filter For
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <% Tag.all.each do |i| %>
-          <%= link_to i.name, hash_path({filter_in: i.name}), class: "dropdown-item", style: is_a_param("filter_in", i.name) ? "color: red;" :  "color: white;" %>
+        <% @fi_tags.each do |i| %>
+          <%= link_to i, hash_path({filter_in: i}), class: "dropdown-item", style: "color: red;" %>
+        <% end %>
+        <% (@tags - @fi_tags).each do |i| %>
+          <%= link_to i, hash_path({filter_in: i}), class: "dropdown-item", style: "color: white;" %>
         <% end %>
     </div>
 </div>
 
 <%# FILTER OUT GROUP %>
 <div class="btn-group" style="margin-right: 10px;">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-<%=get_class(@fo_tags.count)%> dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Filter Out
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <% Tag.all.each do |i| %>
-          <%= link_to i.name, hash_path({filter_out: i.name}), class: "dropdown-item", style: is_a_param("filter_out", i.name) ? "color: red;" : "color: white;" %>
+        <% @fo_tags.each do |i| %>
+          <%= link_to i, hash_path({filter_out: i}), class: "dropdown-item", style: "color: red;" %>
+        <% end %>
+        <% (@tags - @fo_tags).each do |i| %>
+          <%= link_to i, hash_path({filter_out: i}), class: "dropdown-item", style: "color: white;" %>
         <% end %>
     </div>
 </div>
 
 <%# SORT GROUP %>
 <div class="btn-group" style="margin-right: 10px;">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-<%=get_class(@sort_by.length)%> dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Sort
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <% ["Started", "Completed", "Biggest Team", "Smallest Team", "Time Taken", "Most Work", "Least Work"].each do |i| %>
+        <% ["Youngest", "Oldest", "Last Completed", "Biggest Team", "Smallest Team", "Time Taken", "Most Work", "Least Work"].each do |i| %>
           <%= link_to i, hash_path({sort: i}, true), class: "dropdown-item", style: is_a_param("sort", i) ? "color: red;" : "color: white;" %>
         <% end %>
     </div>
 </div>
+
+<%= link_to hash_path({completed: !@completed_only}, true) do %>
+  <%= button_tag "See Only Completed?", class: "btn btn-#{get_class(@completed_only ? 1 : 0)}" , style: "margin-right: 1em;"%>
+<% end %>
 
 <br/> <br/>
 

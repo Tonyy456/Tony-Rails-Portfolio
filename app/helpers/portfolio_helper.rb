@@ -9,8 +9,12 @@ module PortfolioHelper
         false
     end
 
+    def get_class(num)
+        num > 0 ? "danger" : "secondary"
+    end
+
     def portfolio_params
-        params.permit(:sort, :filter_in, :filter_out, :tab)
+        params.permit(:sort, :filter_in, :filter_out, :tab, :completed)
     end
 
     def hash_path(hash, remove = false)

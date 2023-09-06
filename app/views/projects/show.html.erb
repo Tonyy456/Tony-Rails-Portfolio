@@ -7,6 +7,13 @@
   </div>
   <br/>
 <% end %>
+<br/>
+<p> 
+  Completed: 
+  <span style="color: red"> 
+    <%= @project.is_completed ? "Yes" : "No" %> 
+  </span>
+</p>
 <div class="p-5 mb-4 bg-body-tertiary rounded-3">
   <div id="<%= dom_id @project %>">
     <div style="display: flex; justify-content: space-between; vertical-align: center;">
