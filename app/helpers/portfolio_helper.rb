@@ -14,7 +14,7 @@ module PortfolioHelper
     end
 
     def portfolio_params
-        params.permit(:sort, :filter_in, :filter_out, :tab, :completed)
+        params.permit(:sort, :filter_in, :filter_out, :tab, :completed, :currently_on)
     end
 
     def hash_path(hash, remove = false)

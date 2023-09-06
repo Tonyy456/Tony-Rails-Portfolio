@@ -10,7 +10,7 @@ class PortfolioController < ApplicationController
   end
 
   def portfolio_params
-    params.permit(:sort, :filter_in, :filter_out, :tab, :completed => [])
+    params.permit(:sort, :filter_in, :filter_out, :tab, :currently_on, :completed)
   end
 
   def index
@@ -30,12 +30,33 @@ class PortfolioController < ApplicationController
       end
     end
 
+    @currently_on = false
+    if params.include?("currently_on")
+      @currently_on = params[:currently_on]
+      if @currently_on == 'true'
+        @currently_on = true
+      elsif @currently_on == 'false'
+        @currently_on = false
+      else
+        redirect_to root_path, alert: "Currently on url parameter is not a boolean?!" and return 
+      end
+    end
+
     if @completed_only
       filtered_projects = @projects.select do |project|
         project.is_completed
       end
       @projects = filtered_projects
     end
+
+    if @currently_on
+      puts "currently on"
+      filtered_projects = @projects.select do |project|
+        project.completed == nil
+      end
+      @projects = filtered_projects
+    end
+
 
     # check if there is a tab to filter for
     if params.include?("tab")

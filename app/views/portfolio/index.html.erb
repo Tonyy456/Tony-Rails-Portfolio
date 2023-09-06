@@ -61,9 +61,15 @@
     </div>
 </div>
 
-<%= link_to hash_path({completed: !@completed_only}, true) do %>
-  <%= button_tag "See Only Completed?", class: "btn btn-#{get_class(@completed_only ? 1 : 0)}" , style: "margin-right: 1em;"%>
-<% end %>
+<div class="btn-group" style="margin-right: 10px;">
+    <button class="btn btn-<%=get_class(@completed_only || @currently_on ? 1 : 0)%> dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Other Options
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <%= link_to "Completed/Maintained?", hash_path({completed: !@completed_only}, true), class: "dropdown-item", style: @completed_only ? "color: red;" : "color: white;" %>
+      <%= link_to "Current Projects?", hash_path({currently_on: !@currently_on}, true), class: "dropdown-item", style: @currently_on ? "color: red;" : "color: white;" %>
+    </div>
+</div>
 
 <br/> <br/>
 
