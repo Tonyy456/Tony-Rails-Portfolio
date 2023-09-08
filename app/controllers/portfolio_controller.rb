@@ -10,7 +10,7 @@ class PortfolioController < ApplicationController
   end
 
   def portfolio_params
-    params.permit(:sort, :filter_in, :filter_out, :tab, :currently_on, :completed)
+    params.permit(:sort, :filter_in, :filter_out, :tab, :currently_on, :completed, :irrelevant)
   end
 
   def index
@@ -27,6 +27,18 @@ class PortfolioController < ApplicationController
         @completed_only = false
       else
         redirect_to root_path, alert: "Completed url parameter is not a boolean?!" and return 
+      end
+    end
+
+    @use_irrelevant = false
+    if params.include?("irrelevant")
+      @use_irrelevant = params[:irrelevant]
+      if @use_irrelevant == 'true'
+        @use_irrelevant = true
+      elsif @use_irrelevant == 'false'
+        @use_irrelevant = false
+      else
+        redirect_to root_path, alert: "Irrelevant url parameter is not a boolean?!" and return 
       end
     end
 
@@ -57,6 +69,12 @@ class PortfolioController < ApplicationController
       @projects = filtered_projects
     end
 
+    if !@use_irrelevant
+      relevant_projects = @projects.select do |project|
+        !project.irrelevant
+      end
+      @projects = relevant_projects
+    end
 
     # check if there is a tab to filter for
     if params.include?("tab")

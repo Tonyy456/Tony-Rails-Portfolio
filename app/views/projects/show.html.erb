@@ -18,7 +18,7 @@
       </a>
     </div>
   <% end %>
-  <p style="vertical-align: middle; margin-top: auto;"> 
+  <p style="vertical-align: middle; margin-top: auto; margin-right: 15px;"> 
     <span> Completed: </span>
     <span style="color: red"> 
       <%= @project.is_completed ? "Yes" : "No" %> 
@@ -61,6 +61,27 @@
 
   <%= @project.body %>
   </div>
+</div>
+
+<div class="container">
+  <% if user_signed_in? %>
+      <table class="table table-dark table-striped table-hover table-bordered">
+        <thead>
+          <tr class="table-dark">
+            <th>Item</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @project.attributes.each_pair do |name, value| %>
+            <tr> 
+              <td> <%= name %> </td> 
+              <td> <%= value %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
 </div>
 
 <%#

@@ -68,6 +68,7 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <%= link_to "Completed/Maintained?", hash_path({completed: !@completed_only}, true), class: "dropdown-item", style: @completed_only ? "color: red;" : "color: white;" %>
       <%= link_to "Current Projects?", hash_path({currently_on: !@currently_on}, true), class: "dropdown-item", style: @currently_on ? "color: red;" : "color: white;" %>
+      <%= link_to "See Irrelevant Projects?", hash_path({irrelevant: !@use_irrelevant}, true), class: "dropdown-item", style: @use_irrelevant ? "color: red;" : "color: white;" %>
     </div>
 </div>
 
