@@ -10,6 +10,13 @@ Rails.application.routes.draw do
     put 'users' => 'devise/registrations#update', :as => 'user_registration'
   end
 
+  # tags controller
+  get '/tags', to: 'tags#index', as: 'tag_manager'
+  get '/tags/show/:id', to: 'tags#show', as: 'tag_show'
+  get '/tags/edit/:id', to: 'tags#edit', as: 'tag_edit'
+  post '/tags/edit/:id', to: 'tags#update', as: 'tag_update'
+  delete '/tags/destroy/:id', to: 'tags#destroy', as: 'tag_destroy'
+
   # models/run.rb CRUD
   get '/runs/manager', to: 'runs#manager', as: 'runs_manager'
   get '/runs/calendar/:year/:month', to: 'runs#calendar', as: 'runs_calendar'

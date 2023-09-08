@@ -1,0 +1,31 @@
+<br/>
+<h1> Tags Manager </h1>
+
+<table class="table table-bordered table-stripped table-dark border-secondary table-sm" style="text-align: center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Project Count</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <% @tags.each_with_index do |tag, index| %>
+    <tr style="vertical-align: middle;">
+      <th scope="row"> <%= index %> </th>
+      <td> <%= tag.title %> </td>
+      <td> <%= tag.projects.count %> </td>
+      <td class="d-flex"> 
+        <%= link_to tag_show_path(id: tag) do %>
+            <button class="btn btn-primary" style="margin-right:15px"> View </button>
+        <% end %>
+        <%= link_to tag_edit_path(id: tag) do %>
+            <button class="btn btn-primary" style="margin-right:15px"> Edit </button>
+        <% end %>
+        <%= button_to "Destroy", tag_destroy_path(id: tag), class: "btn btn-primary", method: :delete, :onclick => "return confirm('Are you sure?')" %>
+      </td>      
+    </tr>
+    <% end %>
+  </tbody>
+</table>

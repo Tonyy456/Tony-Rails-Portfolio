@@ -1,0 +1,47 @@
+<div style="margin: 15px;">
+    <span style="font-size: 2em;">
+        Tag
+    </span>
+    <span style="background: pink; padding: 5px; border-radius: 5px; color: black; font-size: 1.75em;">
+        <%= @tag.name%>
+    </span>
+</div>
+
+<%= link_to tag_manager_path do %>
+    <button class="btn btn-primary"> Manager </button>
+<% end %>
+<%= link_to tag_edit_path(@tag) do %>
+    <button class="btn btn-primary"> Edit </button>
+<% end %>
+
+<br/><br/>
+
+<% count = @tag.projects.count %>
+<table class="table table-dark table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>      
+        <tr> 
+            <td> Project Count </td> 
+            <td>
+                <%=  count %>
+            </td>
+        </tr>
+        <tr> 
+            <td> Projects </td> 
+            <td>
+            <% @tag.projects.each_with_index do |project, index| %>
+                <% if index < count - 1%>
+                    <%= "#{project.title}, " %>
+                <% else %>
+                    <%= "#{project.title} " %>
+                <% end %>
+            <% end %>
+            </td>
+        </tr>
+    </tbody>
+</table>
