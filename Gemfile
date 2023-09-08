@@ -36,3 +36,4 @@ gem 'carrierwave', '~> 3.0'
 gem 'jquery-turbolinks'
 
 
+

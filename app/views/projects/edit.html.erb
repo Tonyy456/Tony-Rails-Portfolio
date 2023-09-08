@@ -54,6 +54,11 @@
     <%= form.check_box :is_completed, class: "form-check" %>
   </div> <br/>
 
+  <div>
+    <%= form.label "Github", class: "form-label", style: "display: block; font-size: 1.5em;" %>
+    <%= form.text_field :github, class: "form-control" %>
+  </div>  <br/>
+
   <div class="field">
     <%= form.label :teamsize, style: "display: block; font-size: 1.5em;" %>
     <%= form.number_field :teamsize,  class: "form-control" %>

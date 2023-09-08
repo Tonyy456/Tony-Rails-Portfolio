@@ -20,6 +20,22 @@
     object-fit: cover;
 }
 
+/* Adjust the GitHub icon's color and size */
+a svg {
+    width: 100%; /* Adjust the width as desired */
+    height: 100%; /* Adjust the height as desired */
+}
+
+.project-header-details
+{
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+  
+
 
 tr {
     display: table-row;

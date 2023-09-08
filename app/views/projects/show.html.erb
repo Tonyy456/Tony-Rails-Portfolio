@@ -8,12 +8,23 @@
   <br/>
 <% end %>
 <br/>
-<p> 
-  Completed: 
-  <span style="color: red"> 
-    <%= @project.is_completed ? "Yes" : "No" %> 
-  </span>
-</p>
+<div class="project-header-details" style="margin-bottom: 15px;">
+  <% if @project.github && @project.github.strip.length > 0 %>
+    <div style="width: 50px; height: 50px; margin-right: 15px;">
+      <a href=<%= @project.github %> target="_blank" rel="noopener" style="width: 100%; height: 100%">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" style="fill: white;" viewBox="0 0 24 24">
+          <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 22c-6.08 0-11-4.92-11-11s4.92-11 11-11 11 4.92 11 11-4.92 11-11 11zm0-19.75c-4.98 0-9 4.02-9 9 0 3.98 2.58 7.36 6.17 8.54.45.08.62-.2.62-.45 0-.22-.02-.78-.02-1.43-2.26.49-2.74-.55-2.74-.55-.37-.94-.91-1.19-.91-1.19-.74-.5.06-.49.06-.49.82.06 1.26.84 1.26.84.73 1.25 1.91.88 2.37.67.07-.53.28-.88.51-1.08-1.79-.2-3.68-.9-3.68-4.01 0-.88.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.12-1.9 3.81-3.69 4.01.29.25.54.74.54 1.49 0 1.08-.01 1.95-.01 2.21 0 .25.17.54.63.45 3.58-1.18 6.16-4.57 6.16-8.54 0-4.98-4.02-9-9-9z"/>
+        </svg>
+      </a>
+    </div>
+  <% end %>
+  <p style="vertical-align: middle; margin-top: auto;"> 
+    <span> Completed: </span>
+    <span style="color: red"> 
+      <%= @project.is_completed ? "Yes" : "No" %> 
+    </span>
+  </p>
+</div>
 <div class="p-5 mb-4 bg-body-tertiary rounded-3">
   <div id="<%= dom_id @project %>">
     <div style="display: flex; justify-content: space-between; vertical-align: center;">
