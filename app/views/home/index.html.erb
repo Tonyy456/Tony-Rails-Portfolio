@@ -11,19 +11,38 @@
 <% end %>
 <div class="banner-container" style="z-index: 1000; background: rgba(0,0,0,0.6)">   
 </div>
-<div style="position: absolute; color: white; font-size: 3em; z-index: 10001; width: 100%; left: 0px; ">
-    <div style="margin-top: 15vh; display: flex; flex-direction: column; align-content: center;
+<div style="position: absolute; color: white; font-size: 3em; z-index: 10001; width: 100%; left: 0px; height: 45vw ">
+    <div style="margin: auto; height: 100%; display: flex; flex-direction: column; align-content: center;
     width: 100%; position: relative; justify-content: center; flex-wrap: wrap;">
-        <span style="font-size: 2em; height: fit-content; display: inline-block; font-family: cursive;"> 
-            Anthony D'Alesandro
-        </span>
-        <span style="font-size:0.5em; color: rgb(200,200,200); height: fit-content; display: inline-block"> 
-            Computer Science . Athlete . Game Developement
-        </span>
+        <div style="text-align: center; background: black; border-radius: 45px; width: 68vw; display: flex; flex-direction: column; padding: 15px;">
+            <span style="font-size: 7vw; height: fit-content; display: inline-block; font-family: cursive;"> 
+                Anthony D'Alesandro
+            </span>
+            <span style="font-size:2vw; color: rgb(200,200,200); height: fit-content; display: inline-block; text-align: center;"> 
+            </span>
+        </div>
     </div>
 </div>
-<div style="height: 45vh; margin-bottom: 10px;">
+<div style="height: 45vw; margin-bottom: 10px;"> </div>
 
+<%#
+<p style="font-size: 2em; color: white; margin: auto; text-align: center;"> Tony D'Alesandro </p>
+%>
+<br/><br/>
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
+    <div style="width: min-content">
+        <%= image_tag("ProfPhoto.JPG", style: "max-width: 85vw; width: 300px; border-radius: 5%;") %>
+    </div>
+    <div style="max-width: 85vw; width: 500px; color: white;">
+        <p style="text-align: center">
+            <span style="font-size: 2em;"> About Me </span>
+        </p>
+        <p>
+            I'm <span style="color: orangered"> Anthony D'Alesandro </span>, a software engineer and game developer based in Columbus, Ohio. 
+            I earned my education from the Ohio State University and have a passion for both coding and creating immersive gaming experiences. 
+            When I'm not in front of a computer, you'll often find me on the running trail. 
+            Feel free to reach out with any questions or to chat about software, game development, or running. <br/> <br/> Let's connect!
+        </p>
+    </div>
 </div>
-<h1> Tony D'Alesandro </h1>
 
