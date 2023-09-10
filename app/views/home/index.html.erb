@@ -1,5 +1,5 @@
 <% if current_page?(root_url) && HomeVideo.all.length > 0 %>
-    <div class="banner-container">       
+    <div class=" banner-height banner-container">       
         <% HomeVideo.all.shuffle.each_with_index do |video, index| %>
             <video muted playsinline id="banner-video-<%= index %>" style='display: none;'>
                 <source 
@@ -9,40 +9,64 @@
         <% end %>      
     </div>
 <% end %>
-<div class="banner-container" style="z-index: 1000; background: rgba(0,0,0,0.6)">   
+<div class=" banner-height banner-container" style="z-index: 1000; background: rgba(0,0,0,0.6); ">   
 </div>
-<div style="position: absolute; color: white; font-size: 3em; z-index: 10001; width: 100%; left: 0px; height: 45vw ">
+<div class="banner-height" style="position: absolute; color: white; font-size: 3em; z-index: 10001; width: 100%; left: 0px; ">
     <div style="margin: auto; height: 100%; display: flex; flex-direction: column; align-content: center;
     width: 100%; position: relative; justify-content: center; flex-wrap: wrap;">
-        <div style="text-align: center; background: black; border-radius: 45px; width: 68vw; display: flex; flex-direction: column; padding: 15px;">
-            <span style="font-size: 7vw; height: fit-content; display: inline-block; font-family: cursive;"> 
+        <div style="text-align: center; background: rgba(0,0,0,0); border-radius: 45px; width: 68vw; display: flex; flex-direction: column; padding: 15px;">
+            <span style="font-size: 5vw; height: fit-content; display: inline-block;"> 
                 Anthony D'Alesandro
             </span>
             <span style="font-size:2vw; color: rgb(200,200,200); height: fit-content; display: inline-block; text-align: center;"> 
+                Software Engineer . Game Developer . Athlete
             </span>
         </div>
     </div>
 </div>
-<div style="height: 45vw; margin-bottom: 10px;"> </div>
+<div class="banner-height" style="margin-bottom: 10px;"> </div>
 
 <%#
 <p style="font-size: 2em; color: white; margin: auto; text-align: center;"> Tony D'Alesandro </p>
 %>
-<br/><br/>
+<p style="text-align: center; color: white; margin: 50px;">
+    <span style="font-size: 3em;"> About Me </span>
+</p>
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
-    <div style="width: min-content">
+    <div style="width: min-content; margin: 25px;">
         <%= image_tag("ProfPhoto.JPG", style: "max-width: 85vw; width: 300px; border-radius: 5%;") %>
     </div>
-    <div style="max-width: 85vw; width: 500px; color: white;">
-        <p style="text-align: center">
-            <span style="font-size: 2em;"> About Me </span>
-        </p>
+    <div style="max-width: 85vw; width: 500px; color: white; margin: auto; vertical-align: middle;">
         <p>
             I'm <span style="color: orangered"> Anthony D'Alesandro </span>, a software engineer and game developer based in Columbus, Ohio. 
             I earned my education from the Ohio State University and have a passion for both coding and creating immersive gaming experiences. 
             When I'm not in front of a computer, you'll often find me on the running trail. 
-            Feel free to reach out with any questions or to chat about software, game development, or running. <br/> <br/> Let's connect!
+            Feel free to reach out with any questions or to chat about software, game development, or running.
+        </p>
+        <p style="text-align: center; color: white;">
+            <span> Let's connect! </span>
         </p>
     </div>
+</div>
+
+<div style="width: 100%; height: 5px; background: white; margin: 25px;"> </div>
+<p style="text-align: center; color: white; margin-bottom: 50px;">
+    <span style="font-size: 3em;"> Skills and Expertise </span>
+</p>
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
+    <div style="max-width: 85vw; width: 500px; color: white; vertical-align: middle;">
+        <% [["C#", "95%"], ["JavaScript/HTML/CSS", "80%"], ["Unity", "90%"], ["Python", "70%"]].each do |skill_and_percentage| %>
+            <% skill = skill_and_percentage[0] %>
+            <% percent = skill_and_percentage[1] %>
+            <div class="skill-bar">
+                <%= skill %>
+                <div class="skill-level" style="width: <%="#{percent}"%>;"><%= percent %></div>
+            </div>
+        <% end %>
+    </div>
+    <%# 
+    <div style="width: min-content; margin: 25px;">
+        <%# image_tag("ProfPhoto.JPG", style: "max-width: 85vw; width: 300px; border-radius: 5%;") 
+    </div> %>
 </div>
 
