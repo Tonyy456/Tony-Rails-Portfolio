@@ -64,9 +64,44 @@
             </div>
         <% end %>
     </div>
-    <%# 
-    <div style="width: min-content; margin: 25px;">
-        <%# image_tag("ProfPhoto.JPG", style: "max-width: 85vw; width: 300px; border-radius: 5%;") 
-    </div> %>
+</div>
+
+<div style="width: 100%; height: 5px; background: white; margin: 25px; margin-top: 75px;"> </div>
+<p style="text-align: center; color: white; margin-bottom: 50px;">
+    <span style="font-size: 3em;"> Featured Projects </span>
+</p>
+<% if @projects.count == 0 %>
+    <p style="text-align: center; margin: auto; font-size: 1.5em;" > There are no featured projects. </p>
+<% end %>
+<div style="justify-content: center" class="d-flex flex-row flex-wrap mb-3">
+  <% @projects.each do |project| %>
+    <div class="p-2">
+      <div class="card" style="width: 18rem; border: 2px solid gray;">
+        <% if project.image.content_type.in?(%w[image/jpeg image/png])%>
+          <%= link_to image_tag(project.image, class: "card-img-top", style: "width: 100%; height: ;"), url_for(project.image) if project.image.attached? %>
+          <hr />
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"> <%= project.title %> </h5>
+          <% project.tags.each do |tag| %>
+            <% if !tag.name.start_with?("!") %>
+              <% properties = get_tag_colors(tag.name, 1.5) %>
+              <div style="background: rgb(<%=properties[:background]%>); color: rgb(<%=properties[:text]%>); padding: 5px; border-radius: 5px; padding-top: 2px; padding-bottom:2px; width: fit-content; display: inline-block; vertical-align: middle; padding-right: 5px; margin-bottom: 5px;">
+                <div style="#position: relative; font-size: 0.7em;">
+                  <%= tag.name %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+          <p class="card-text"><%= project.description%> </p>
+          <% if project[:use_link] %>
+            <%= link_to "View Project", project.page, class: "btn btn-primary" %>
+          <% else %>
+            <%= link_to "View Project", project, class: "btn btn-primary" %>        
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 

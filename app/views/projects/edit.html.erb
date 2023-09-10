@@ -38,7 +38,6 @@
     <%= form.check_box :remove_image %>
   </div>
   <br/>
-
     <div class="field">
     <%= form.label :started, style: "display: block; font-size: 1.5em;" %>
     <%= form.date_field :started,  class: "form-control" %>
@@ -51,6 +50,10 @@
   <div>
     <%= form.label :irrelevant, style: "display: block; font-size: 1.5em;", class: "form-label" %>
     <%= form.check_box :irrelevant, class: "form-check" %>
+  </div> <br/>
+  <div>
+    <%= form.label :featured, style: "display: block; font-size: 1.5em;", class: "form-label" %>
+    <%= form.check_box :featured, class: "form-check" %>
   </div> <br/>
   <div>
     <%= form.label :is_completed, style: "display: block; font-size: 1.5em;", class: "form-label" %>

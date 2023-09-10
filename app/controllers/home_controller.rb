@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   def index
     #flash[:notice] = 'Bro what are you doing?!?!'
     @banner_videos = HomeVideo.all
+    @projects = Project.where(featured: true)
   end
 
   def admin
