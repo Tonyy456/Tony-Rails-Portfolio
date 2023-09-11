@@ -92,4 +92,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',       # Gmail SMTP server
+    port: 587,                       # SMTP port (587 for TLS, 465 for SSL)
+    domain: 'antdev.cc',       # Your domain (optional)
+    user_name: 'ajdalesandro0115@gmail.com', # Your Gmail email address
+    password: ENV['GMAIL_PASSWORD'],       # Your Gmail email password or App Password
+    authentication: 'plain',        # Use 'plain' authentication method
+    enable_starttls_auto: true,      # Enable TLS
+  }
 end

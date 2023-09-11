@@ -23,12 +23,23 @@
       <div class="spinner"></div>
     </div>
 
-    <div class="container" style="min-height: 200vh;">
+    <div class="container" style="">
       <%= render partial: 'shared/alerts' %> 
       <%= yield %>
     </div>  
     <div id="tony-footer" style="margin: auto; text-align: center; margin-top: 200px; margin-bottom: 100px;">
-      * Insert Social Media and Email Etc. here *
+      <a href="mailto:ajdalesandro0115@gmail.com" class="text-light">
+        <%= image_tag("gmail.png", style: "width: 50px; height: 50px;") %>
+      </a>
+      <a href="https://www.youtube.com/@devtony6421" class="text-light">
+        <%= image_tag("youtube.jpeg", style: "width: 50px; height: 50px;") %>
+      </a>
+      <a href="https://github.com/Tonyy456/Tonyy456" class="text-light">
+        <%= image_tag("github.png", style: "width: 50px; height: 50px;") %>
+      </a>
+      <a href="https://www.instagram.com/tonydalesa" class="text-light">
+        <%= image_tag("instagram.jpeg", style: "width: 50px; height: 50px;") %>
+      </a>
     </div>
   </body>
 </html>

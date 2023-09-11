@@ -73,4 +73,16 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # FOR IMAGE PROCESSING VIPS TO MAGIK
   # config.active_storage.variant_processor = :mini_magick
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',       # Gmail SMTP server
+    port: 587,                       # SMTP port (587 for TLS, 465 for SSL)
+    domain: 'antdev.cc',       # Your domain (optional)
+    user_name: 'ajdalesandro0115@gmail.com', # Your Gmail email address
+    password: ENV['GMAIL_PASSWORD'],       # Your Gmail email password or App Password
+    authentication: 'plain',        # Use 'plain' authentication method
+    enable_starttls_auto: true,      # Enable TLS
+  }
 end

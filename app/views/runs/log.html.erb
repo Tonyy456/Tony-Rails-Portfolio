@@ -4,6 +4,7 @@ License: MIT
 
 Displays runlog like a github contribution calendar
 %>
+<br/><br/>
 <h1> Run Log  - <span style="color:rgb(255,255,0)"><%= sprintf("%d", Time.now.in_time_zone('Eastern Time (US & Canada)').to_date - Run.minimum(:date) + 1) %></span> Days</h1>
 <span style="color: rgb(200,150,150)"> This runlog may be out of date. Anthony must log in and refresh it himself. </span>
 <br/>
