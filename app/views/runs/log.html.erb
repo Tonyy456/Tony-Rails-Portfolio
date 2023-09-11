@@ -41,12 +41,12 @@ Displays runlog like a github contribution calendar
 
 <br/>
 
-<div style="border: 1px solid lightgray; width: fit-content; border-radius: 11px; align-items: center; margin-bottom: 150px">
+<div style="border: 1px solid lightgray; width: 100%; overflow: scroll; align-items: center; border-radius: 11px; align-items: center; margin-bottom: 150px">
   <br/>
   <%= render partial: "visual_key" %>
   <% (@start..@end).each do |year| %>
       <% get_weeks_and_tabel(year) do |year_array, labels| %>
-          <div style="width: fit-content; border-radius: 11px; align-items: center;">
+          <div style="width: fit-content; border-radius: 11px; align-items: center; margin: auto;">
               <h1 style="text-align: center;"> <%= year %> </h1>
               <table role="grid" aria-readonly="true" class="ContributionCalendar-grid js-calendar-graph-table" style="display: inline-block; border-spacing: 4px; overflow: hidden; position: relative; margin: 10px;" aria-describedby="contribution-graph-description">
               <caption class="sr-only">Contribution Graph</caption>
