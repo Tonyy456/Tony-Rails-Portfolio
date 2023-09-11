@@ -105,3 +105,28 @@
   <% end %>
 </div>
 
+<div style="width: 100%; height: 5px; background: white; margin: 25px; margin-top: 75px;"> </div>
+<p style="text-align: center; color: white; margin-bottom: 50px;">
+    <span style="font-size: 3em;"> Contact Me </span>
+</p>
+<%= form_with(model: @contact, local: true) do |form| %>
+    <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+        <%= form.label :email %>
+        <%= form.email_field :email, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+        <%= form.label :message %>
+        <%= form.text_area :message, class: 'form-control', style: "height: 30vh", required: true %>
+    </div>
+
+    <br/>
+
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>
+
