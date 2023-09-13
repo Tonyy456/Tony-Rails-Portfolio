@@ -29,6 +29,10 @@ class TagsController < ApplicationController
     def update
       tag_id = params[:id]
       tag = Tag.find(tag_id)
+      if params.include?("hide_in_view")
+        tag.hide_in_view = params[:hide_in_view]
+        tag.save
+      end
       if params.include?("add_projects")
         project_ids = params[:add_projects]
         project_ids.each do |item|
@@ -53,7 +57,7 @@ class TagsController < ApplicationController
           end
         end
       end
-      redirect_to tag_edit_path(tag_id)
+      redirect_to tag_edit_path(tag_id), notice: "successfully updated #{tag.title}"
     end
 
     def destroy

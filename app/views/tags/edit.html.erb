@@ -16,6 +16,10 @@
 
 <%= form_with(url: tag_update_path, method: :post) do |form| %>
     <br/><br/>
+    <div>
+        <%= form.label "Hide?", style: "display: block; font-size: 1.5em;", class: "form-label" %>
+        <%= form.check_box :hide_in_view, class: "form-check", checked: @tag.hide_in_view %>
+    </div> <br/>
     <div class="form-group">
         <%= form.label "Tagged (click to remove)", class: "col-md-4 control-label", style: "font-size: 2em;"  %>
         <div class="col-md-4">

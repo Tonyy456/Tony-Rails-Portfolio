@@ -147,7 +147,9 @@ class PortfolioController < ApplicationController
     @projects.each do |project|
       project.tags.each do |tag|
         if !@tags.include?(tag.name)
-          @tags << tag.name
+          if !tag.hide_in_view
+            @tags << tag.name
+          end
         end
       end
     end
