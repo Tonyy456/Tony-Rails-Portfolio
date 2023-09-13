@@ -139,6 +139,8 @@ class PortfolioController < ApplicationController
       else
         @projects = @projects.sort_by { |project| project.started || Time.zone.now - 100.years }.reverse
       end
+    else
+      @projects = @projects.sort_by { |project| project.started || Time.zone.now - 100.years }.reverse
     end
 
     @tags = []
