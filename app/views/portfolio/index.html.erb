@@ -100,7 +100,14 @@
               </div>
             <% end %>
           <% end %>
-          <p class="card-text"><%= project.description%> </p>
+          <p class="card-text">
+            <% limit_length = 65 %>
+            <% if project.description.length > limit_length %>
+              <%= project.description.slice(0,limit_length) + "..." %>
+            <% else %>
+              <%= project.description %> 
+            <% end %>
+          </p>
           <% if project[:use_link] %>
             <%= link_to "View Project", project.page, class: "btn btn-primary" %>
           <% else %>
