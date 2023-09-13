@@ -137,7 +137,7 @@ class PortfolioController < ApplicationController
       when "Least Work"
         @projects = @projects.sort_by { |project| project.work_taken || 100000000 }
       else
-        # do nothing
+        @projects = @projects.sort_by { |project| project.started || Time.zone.now - 100.years }.reverse
       end
     end
 
