@@ -74,6 +74,7 @@ Rails.application.routes.draw do
   get 'autologger', to: 'strava#auto_logger', as: 'autologger'
 
   patch 'toggle_tag_hide_in_view/:id', to: 'tags#toggle_tag_hide_in_view', as: 'toggle_tag_hide'
+  patch 'toggle_tag_on_project/:id', to: 'projects#toggle_tag_on_project', as: 'toggle_tag_on_project'
   
   root to: 'home#index'
   get 'ad', to: redirect('/users/sign_in')

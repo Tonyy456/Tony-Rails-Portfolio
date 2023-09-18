@@ -3,7 +3,7 @@ class TagsController < ApplicationController
 
     def index
       @tags = Tag.all
-      @tags = @tags.sort_by{|item| item.projects.count }.reverse
+      @tags = @tags.sort_by{|tag| [-tag.projects.count, tag.name] }
     end
 
     def show
@@ -12,6 +12,13 @@ class TagsController < ApplicationController
       else
         redirect_to root_path, alert: "Id not included in path, report this error to website manager"
       end
+    end
+
+    # GET
+    def new
+    end
+    # POST
+    def create
     end
 
     def edit
@@ -57,7 +64,35 @@ class TagsController < ApplicationController
           end
         end
       end
-      redirect_to tag_edit_path(tag_id), notice: "successfully updated #{tag.title}"
+      if params.include?("title")
+        change_to = params[:title].strip.gsub('.','').upcase
+        if tag.name != change_to
+          match = Tag.find_by(name: change_to)
+          message = "Didnt rename it"
+          
+          if match # check if a tag already exists with such a name
+            message = "Found a match, merged tags together."
+            # add all projects to match, delete current tag
+            tag.projects.each do |project|
+              if !match.projects.include?(project)
+                match.projects << project
+              end
+            end
+            tag.projects.clear
+            tag.delete
+
+            redirect_to tag_edit_path(id: match), notice: "Merged #{tag.name} to #{match.name}" and return
+          else # if not just change title and move on.
+            message = "No match, just rename!"
+            tag.name = change_to
+            if !tag.save
+              redirect_to tag_edit_path(tag_id), notice: "failed to change #{tag.name}'s name." and return
+            end
+          end
+          redirect_to tag_edit_path(tag_id), notice: "successfully updated #{tag.name}. #{message}" and return
+        end
+      end
+      redirect_to tag_edit_path(tag_id), notice: "successfully updated #{tag.name}"
     end
 
     def destroy

@@ -91,7 +91,7 @@ class PortfolioController < ApplicationController
     if params.include?("filter_in")
       tag_names = params[:filter_in]
       tag_names = [tag_names] if !tag_names.is_a?(Array)
-      tag_names = tag_names.map{ |item| item.upcase.gsub('!','') } 
+      tag_names = tag_names.map{ |item| item.upcase.strip } 
       @fi_tags = tag_names
       filtered_projects = @projects.select do |project|
         project.tags.any? { |tag| tag_names.include?(tag.title) }
@@ -103,7 +103,7 @@ class PortfolioController < ApplicationController
     if params.include?("filter_out")
       tag_names = params[:filter_out]
       tag_names = [tag_names] if !tag_names.is_a?(Array)
-      tag_names = tag_names.map{ |item| item.upcase.gsub('!','') } 
+      tag_names = tag_names.map{ |item| item.upcase } 
       @fo_tags = tag_names
       filtered_projects = @projects.reject do |project|
         project.tags.any? { |tag| tag_names.include?(tag.title) }
@@ -118,7 +118,7 @@ class PortfolioController < ApplicationController
     # Started, Completed, Biggest Team, Smallest Team, Time Taken, Most Work, Least Work
     @sort_by = ""
     if params.include?("sort")
-      @sort_by = params[:sort].strip.gsub('!','')
+      @sort_by = params[:sort].strip
       case @sort_by
       when "Oldest"
         @projects = @projects.sort_by { |project| project.started || Time.zone.now + 100.years }
@@ -155,8 +155,8 @@ class PortfolioController < ApplicationController
     end
 
     # ensure no funny business
-    @tags = @tags.map{ |item| item.gsub('!','').strip.upcase }
-    @fo_tags = @fo_tags.map{ |item| item.gsub('!','').strip.upcase }
-    @fi_tags = @fi_tags.map{ |item| item.gsub('!','').strip.upcase }
+    @tags = @tags.map{ |item| item.strip.upcase }
+    @fo_tags = @fo_tags.map{ |item| item.strip.upcase }
+    @fi_tags = @fi_tags.map{ |item| item.strip.upcase }
   end
 end

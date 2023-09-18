@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
   def edit
     @current_tags = ""
     count = @project.tags.count
-    @project.tags.each_with_index do |tag, index|
+    @project.tags.sort_by{|tag| [tag.name] }.each_with_index do |tag, index|
       @current_tags += (index < count - 1 ? "#{tag.name}," : "#{tag.name}")
       end
   end
@@ -83,6 +83,20 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url, notice: "project was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  # post
+  def toggle_tag_on_project
+    if params.include?(:id)
+      entry = ProjectTag.find(params[:id])
+      if entry
+        entry.hidden = !entry.hidden
+        if entry.save
+          redirect_back(fallback_location: root_path, notice: "Toggled mf") and return
+        end
+      end
+    end
+    redirect_back(fallback_location: root_path, alert: "L")
   end
 
   private
