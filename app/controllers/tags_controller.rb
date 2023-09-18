@@ -66,6 +66,25 @@ class TagsController < ApplicationController
       tag.destroy
       redirect_to tag_manager, notice: "destroyed #{tag.name}"
     end
+
+    def toggle_tag_hide_in_view
+      tag = Tag.find(params[:id])
+
+      
+      if tag
+        hide = tag.hide_in_view
+        tag.hide_in_view = !hide
+        if tag.save
+          action = hide ? "Displayed" : "Hide"
+          redirect_back(fallback_location: root_path, notice: "#{action} #{tag.title}!")
+        else
+          redirect_back(fallback_location: root_path, notice: "Failed on #{tag.title}!")
+        end
+      else
+        redirect_back(fallback_location: root_path, alert: "Did not find tag #{params[:id]}!")
+      end
+      
+    end
   end
   
   

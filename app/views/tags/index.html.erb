@@ -17,6 +17,11 @@
       <td> <%= tag.title %> </td>
       <td> <%= tag.projects.count %> </td>
       <td class="d-flex"> 
+        <% if tag.hide_in_view %>
+          <%= button_to "Show Tag", toggle_tag_hide_path(id: tag), class: "btn btn-danger", style: "margin-right:15px", method: :patch %>
+        <% else %>
+          <%= button_to "Hide Tag", toggle_tag_hide_path(id: tag), class: "btn btn-primary", style: "margin-right:15px", method: :patch %>
+        <% end %>      
         <%= link_to tag_show_path(id: tag) do %>
             <button class="btn btn-primary" style="margin-right:15px"> View </button>
         <% end %>

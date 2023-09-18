@@ -70,7 +70,10 @@ Rails.application.routes.draw do
   get 'portfolio', to: 'portfolio#index'
   get 'home', to: 'home#index'
 
+  # TODO get rid of this?
   get 'autologger', to: 'strava#auto_logger', as: 'autologger'
+
+  patch 'toggle_tag_hide_in_view/:id', to: 'tags#toggle_tag_hide_in_view', as: 'toggle_tag_hide'
   
   root to: 'home#index'
   get 'ad', to: redirect('/users/sign_in')
