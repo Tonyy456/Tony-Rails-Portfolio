@@ -2,31 +2,6 @@
 
 <%# render "form", project: @project %>
 <p> Manage Projects </p>
-<table class="table table-bordered table-stripped table-dark border-secondary table-sm" style="text-align: center">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    <% @project.project_tags.sort_by{|entry| [entry.tag.name] }.each_with_index do |entry, index| %>
-    <tr style="vertical-align: middle;">
-      <th scope="row"> <%= index %> </th>
-      <td> <%= entry.tag.name %> </td>
-      <td class="d-flex"> 
-        <% if entry.hidden %>
-          <%= button_to "Show", toggle_tag_on_project_path(id: entry), class: "btn btn-danger", style: "margin-right:15px", method: :patch %>
-        <% else %>
-          <%= button_to "Hide", toggle_tag_on_project_path(id: entry), class: "btn btn-primary", style: "margin-right:15px", method: :patch %>
-        <% end %>      
-      </td>      
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <%= form_with(model: @project, id: "rsvp") do |form| %>
   <% if @project.errors.any? %>
     <div style="color: red">

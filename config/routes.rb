@@ -75,6 +75,8 @@ Rails.application.routes.draw do
 
   patch 'toggle_tag_hide_in_view/:id', to: 'tags#toggle_tag_hide_in_view', as: 'toggle_tag_hide'
   patch 'toggle_tag_on_project/:id', to: 'projects#toggle_tag_on_project', as: 'toggle_tag_on_project'
+  patch 'hide_on_all_projects/:id', to: 'tags#hide_on_all_projects', as: 'hide_on_all_projects'
+  patch 'show_on_all_projects/:id', to: 'tags#show_on_all_projects', as: 'show_on_all_projects'
   
   root to: 'home#index'
   get 'ad', to: redirect('/users/sign_in')

@@ -16,19 +16,23 @@
       <th scope="row"> <%= index %> </th>
       <td> <%= tag.name %> </td>
       <td> <%= tag.projects.count %> </td>
-      <td class="d-flex"> 
-        <% if tag.hide_in_view %>
-          <%= button_to "Show Tag", toggle_tag_hide_path(id: tag), class: "btn btn-danger", style: "margin-right:15px", method: :patch %>
-        <% else %>
-          <%= button_to "Hide Tag", toggle_tag_hide_path(id: tag), class: "btn btn-primary", style: "margin-right:15px", method: :patch %>
-        <% end %>      
+      <td class="d-flex" style="justify-content: space-around; font-family: monospace;"> 
         <%= link_to tag_show_path(id: tag) do %>
-            <button class="btn btn-primary" style="margin-right:15px"> View </button>
+            <button class="btn btn-primary"> View </button>
         <% end %>
         <%= link_to tag_edit_path(id: tag) do %>
-            <button class="btn btn-primary" style="margin-right:15px"> Edit </button>
+            <button class="btn btn-primary"> Edit </button>
         <% end %>
         <%= button_to "Destroy", tag_destroy_path(id: tag), class: "btn btn-primary", method: :delete, :onclick => "return confirm('Are you sure?')" %>
+        <% if tag.hide_in_view %>
+          <%= button_to "Show Tag", toggle_tag_hide_path(id: tag), class: "btn btn-danger", method: :patch %>
+        <% else %>
+          <%= button_to "Hide Tag", toggle_tag_hide_path(id: tag), class: "btn btn-primary", method: :patch %>
+        <% end %>
+        <% n_hidden = tag.project_tags.filter{|tag| tag.hidden}.count %>    
+        <% n_shown = tag.project_tags.count - n_hidden %>  
+        <%= button_to "Show On All Projects", show_on_all_projects_path(id: tag), class: "btn btn-#{n_hidden > 0 ? "primary" : "secondary"}", method: :patch %>
+        <%= button_to "Hide On All Projects", hide_on_all_projects_path(id: tag), class: "btn btn-#{n_shown > 0 ? "primary" : "secondary"}", method: :patch %>
       </td>      
     </tr>
     <% end %>

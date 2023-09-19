@@ -75,7 +75,15 @@ class TagsController < ApplicationController
             # add all projects to match, delete current tag
             tag.projects.each do |project|
               if !match.projects.include?(project)
-                match.projects << project
+                # ensure weather or not the tag is hidden on a project is transfered
+                c_entry = ProjectTag.find_by(project: project, tag: tag)
+                entry = ProjectTag.new
+                entry.project = project
+                entry.tag = match
+                entry.hidden = c_entry.hidden
+                if !entry.save
+                  redirect_to tag_edit_path(tag_id), notice: "failed to transfer projects to #{match.name}'s name." and return
+                end
               end
             end
             tag.projects.clear
@@ -104,8 +112,7 @@ class TagsController < ApplicationController
 
     def toggle_tag_hide_in_view
       tag = Tag.find(params[:id])
-
-      
+ 
       if tag
         hide = tag.hide_in_view
         tag.hide_in_view = !hide
@@ -117,8 +124,35 @@ class TagsController < ApplicationController
         end
       else
         redirect_back(fallback_location: root_path, alert: "Did not find tag #{params[:id]}!")
+      end 
+    end
+
+    def hide_on_all_projects
+      tag = Tag.find(params[:id])
+ 
+      if tag
+        tag.project_tags.each do |entry|
+          entry.hidden = true
+          entry.save
+        end
+        redirect_back(fallback_location: root_path, notice: "Successfully made #{tag.name} hidden on all projects!") and return
+      else
+        redirect_back(fallback_location: root_path, alert: "Did not find tag #{params[:id]}!")
       end
-      
+    end
+
+    def show_on_all_projects
+      tag = Tag.find(params[:id])
+ 
+      if tag
+        tag.project_tags.each do |entry|
+          entry.hidden = false
+          entry.save
+        end
+        redirect_back(fallback_location: root_path, notice: "Successfully showed #{tag.name} on all projects!") and return
+      else
+        redirect_back(fallback_location: root_path, alert: "Did not find tag #{params[:id]}!")
+      end
     end
   end
   
