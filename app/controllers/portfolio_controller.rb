@@ -143,7 +143,7 @@ class PortfolioController < ApplicationController
       # sort by youngest? oldest?
       @projects = @projects.sort_by do |project| 
         started = project.started || Time.zone.now - 100.years
-        completed = project.completed || Time.zone.now - 100.years
+        completed = project.completed || Time.zone.now
         latest = started <= completed ? completed : started
         latest
       end.reverse
