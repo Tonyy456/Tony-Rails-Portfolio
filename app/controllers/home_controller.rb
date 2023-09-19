@@ -5,6 +5,23 @@ class HomeController < ApplicationController
     @projects = Project.where(featured: true)
   end
 
+  def resume
+    render layout: 'resume'
+  end
+
+  def show_file
+    filename = params[:filename] + '.pdf'
+    path = File.join(Rails.root, 'public', 'pdfs', filename)
+
+    if File.exist?(path)
+      send_file path, type: 'application/pdf', disposition: 'inline'
+    else
+      # Handle the case where the PDF file does not exist
+      # You can render an error view or redirect as needed
+      redirect_to root_path, alert: "#{path} does not exist."
+    end
+  end
+
   def admin
     admin_only
   end
