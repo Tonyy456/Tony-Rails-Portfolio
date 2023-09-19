@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects or /projects.json
   def index
     @projects = Project.all
+    @projects = @projects.sort_by{ |project| [project.title] }
   end
 
   # GET /projects/1 or /projects/1.json
@@ -95,6 +96,18 @@ class ProjectsController < ApplicationController
           redirect_back(fallback_location: root_path, notice: "Toggled mf") and return
         end
       end
+    end
+    redirect_back(fallback_location: root_path, alert: "L")
+  end
+
+  def toggle_relevance
+    if params.include?(:id)
+      project = Project.find(params[:id])
+      if project
+        project.irrelevant = !project.irrelevant
+        project.save
+      end
+      redirect_back(fallback_location: root_path, notice: "Toggled Relevance on #{project.title}") and return
     end
     redirect_back(fallback_location: root_path, alert: "L")
   end

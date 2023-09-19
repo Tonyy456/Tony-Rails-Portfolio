@@ -4,6 +4,9 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
+      <th scope="col">Team Size</th>
+      <th scope="col">Featured</th>
+      <th scope="col">Is Completed</th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -12,11 +15,26 @@
     <tr style="vertical-align: middle;">
       <th scope="row"> <%= index %> </th>
       <td> <%= project.title %> </td>
-
+      <td> <%= project.teamsize %> </td>
+      <td> 
+        <span style="color: <%= project.featured ? "green" : "red" %>"> 
+          <%= project.featured %> 
+        </span>    
+      </td>
+      <td> 
+        <span style="color: <%= project.is_completed ? "green" : "red" %>"> 
+          <%= project.is_completed %> 
+        </span>
+      </td>
       <td class="d-flex"> 
         <%= render partial: "buttonget", locals: { text: "View", link: project } %> 
         <%= render partial: "buttonget", locals: { text: "Edit", link: edit_project_path(project) } %> 
         <%= button_to "Destroy", project, class: "col btn btn-primary", method: :delete, style:"margin-right: 1em;", :onclick => "return confirm('Are you sure?')" %>
+        <% if project.irrelevant %>
+          <%= button_to "Make Relevant", toggle_relevance_on_project_path(project), class: "col btn btn-danger", method: :patch, style:"margin-right: 1em;" %>
+        <% else%>
+          <%= button_to "Make Irrelevant", toggle_relevance_on_project_path(project), class: "col btn btn-primary", method: :patch, style:"margin-right: 1em;" %>
+        <%end %>
       </td>      
     </tr>
     <% end %>
