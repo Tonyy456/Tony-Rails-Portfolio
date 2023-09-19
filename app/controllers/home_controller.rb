@@ -6,6 +6,9 @@ class HomeController < ApplicationController
   end
 
   def resume
+    
+  end
+  def resume_as_html
     render layout: 'resume'
   end
 

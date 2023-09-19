@@ -80,6 +80,7 @@ Rails.application.routes.draw do
   patch 'toggle_relevance_on_project/:id', to: 'projects#toggle_relevance', as: 'toggle_relevance_on_project'
 
   get 'resume', to: 'home#resume', as: 'resume'
+  get 'resume/as_html', to: 'home#resume_as_html', as: 'resume_as_html'
   get 'show_file/:filename', to: 'home#show_file', as: 'show_file'
   
   root to: 'home#index'
