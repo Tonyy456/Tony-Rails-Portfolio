@@ -140,8 +140,16 @@ class PortfolioController < ApplicationController
         @projects = @projects.sort_by { |project| project.started || Time.zone.now - 100.years }.reverse
       end
     else
-      @projects = @projects.sort_by { |project| project.started || Time.zone.now - 100.years }.reverse
+      # sort by youngest? oldest?
+      @projects = @projects.sort_by do |project| 
+        started = project.started || Time.zone.now - 100.years
+        completed = project.completed || Time.zone.now - 100.years
+        latest = started <= completed ? completed : started
+        latest
+      end.reverse
+      # @projects = @projects.sort_by { |project| project.started || Time.zone.now - 100.years }.reverse
     end
+    
 
     @tags = []
     @projects.each do |project|
