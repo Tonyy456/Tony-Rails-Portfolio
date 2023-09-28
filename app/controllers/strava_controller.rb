@@ -132,7 +132,7 @@ class StravaController < ApplicationController
             puts "recieved page"
             activities = JSON.parse(response.body)
             break if activities.empty?
-            activities_after_date = activities.select { |activity| mytime(activity['start_date']).to_date > after_date } 
+            activities_after_date = activities.select { |activity| mytime(activity['start_date']).to_date > after_date && activity['type'] == 'Run' } 
             break if activities_after_date.length <= 0
             distances = activities_after_date.map { |activity| process_activity(activity) }
             all_activities.concat(distances)
