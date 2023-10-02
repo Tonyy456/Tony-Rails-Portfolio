@@ -24,6 +24,9 @@
         <li class="nav-item">
           <%= link_to "Runlog", runlog_path, class: "nav-link #{current_page?(runlog_path) ? "active" : ""}"  %>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" target="_blank" href="https://docs.google.com/spreadsheets/d/14swQtOosZ4KVFphT0HaqFgY_Te8vcqTS0uUUC35n2CA/edit?usp=sharing"> Runplan </a>
+        </li>
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to "Admin Home", admin_path, class: "nav-link #{current_page?(admin_path) ? "active" : ""}"  %>
